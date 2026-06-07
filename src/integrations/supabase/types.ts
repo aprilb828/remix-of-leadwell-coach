@@ -14,7 +14,143 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      daily_reflections: {
+        Row: {
+          created_at: string
+          entry_date: string
+          entry_type: string
+          fields: Json
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          entry_date: string
+          entry_type: string
+          fields?: Json
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          entry_date?: string
+          entry_type?: string
+          fields?: Json
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      goal_updates: {
+        Row: {
+          created_at: string
+          details: string | null
+          goal_id: string
+          id: string
+          summary: string
+          transcript: string | null
+          update_type: string
+        }
+        Insert: {
+          created_at?: string
+          details?: string | null
+          goal_id: string
+          id?: string
+          summary: string
+          transcript?: string | null
+          update_type?: string
+        }
+        Update: {
+          created_at?: string
+          details?: string | null
+          goal_id?: string
+          id?: string
+          summary?: string
+          transcript?: string | null
+          update_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "goal_updates_goal_id_fkey"
+            columns: ["goal_id"]
+            isOneToOne: false
+            referencedRelation: "long_term_goals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      long_term_goals: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          status: string
+          target_date: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          status?: string
+          target_date?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          status?: string
+          target_date?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      voice_entries: {
+        Row: {
+          action_taken: string | null
+          area: string | null
+          created_at: string
+          details: string | null
+          follow_up_date: string | null
+          follow_up_needed: boolean
+          id: string
+          log_type: string
+          name: string | null
+          notes: string | null
+          transcript: string | null
+        }
+        Insert: {
+          action_taken?: string | null
+          area?: string | null
+          created_at?: string
+          details?: string | null
+          follow_up_date?: string | null
+          follow_up_needed?: boolean
+          id?: string
+          log_type: string
+          name?: string | null
+          notes?: string | null
+          transcript?: string | null
+        }
+        Update: {
+          action_taken?: string | null
+          area?: string | null
+          created_at?: string
+          details?: string | null
+          follow_up_date?: string | null
+          follow_up_needed?: boolean
+          id?: string
+          log_type?: string
+          name?: string | null
+          notes?: string | null
+          transcript?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
