@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { generateText } from "ai";
 import { z } from "zod";
-import { createLovableAiGatewayProvider } from "./ai-gateway.server";
+import { google } from "@ai-sdk/google";
 
 const LOG_TYPES = ["teacher", "team", "operations", "walkthrough"] as const;
 const AREAS = [
