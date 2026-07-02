@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { generateText } from "ai";
 import { z } from "zod";
-import { createLovableAiGatewayProvider } from "./ai-gateway.server";
+import { google } from "@ai-sdk/google";
 
 const LOG_TYPES = ["teacher", "team", "operations", "walkthrough"] as const;
 const AREAS = [
@@ -99,11 +99,7 @@ export const transcribeAudio = createServerFn({ method: "POST" })
       .parse(input),
   )
   .handler(async ({ data }) => {
-    const key = process.env.LOVABLE_API_KEY;
-    if (!key) throw new Error("LOVABLE_API_KEY is not configured");
-
-    const gateway = createLovableAiGatewayProvider(key);
-    const model = gateway("google/gemini-2.5-flash");
+    const model = google("gemini-2.5-flash");
 
     const transcriptResult = await generateText({
       model,
@@ -129,11 +125,7 @@ export const parseTranscript = createServerFn({ method: "POST" })
     z.object({ transcript: z.string().min(1) }).parse(input),
   )
   .handler(async ({ data }) => {
-    const key = process.env.LOVABLE_API_KEY;
-    if (!key) throw new Error("LOVABLE_API_KEY is not configured");
-
-    const gateway = createLovableAiGatewayProvider(key);
-    const model = gateway("google/gemini-2.5-flash");
+    const model = google("gemini-2.5-flash");
 
     const today = new Date().toISOString().slice(0, 10);
 
