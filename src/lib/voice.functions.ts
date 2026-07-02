@@ -125,11 +125,7 @@ export const parseTranscript = createServerFn({ method: "POST" })
     z.object({ transcript: z.string().min(1) }).parse(input),
   )
   .handler(async ({ data }) => {
-    const key = process.env.LOVABLE_API_KEY;
-    if (!key) throw new Error("LOVABLE_API_KEY is not configured");
-
-    const gateway = createLovableAiGatewayProvider(key);
-    const model = gateway("google/gemini-2.5-flash");
+    const model = google("gemini-2.5-flash");
 
     const today = new Date().toISOString().slice(0, 10);
 
