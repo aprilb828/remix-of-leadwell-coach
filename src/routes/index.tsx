@@ -18,7 +18,7 @@ import { ExportData } from "@/components/ExportData";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LeadWell Instructional Coach Companion™ — CoachWell Framework" },
+      { title: "Companion Education-Coach Edition™ — The Companion Ed Framework™" },
       {
         name: "description",
         content:
@@ -56,10 +56,10 @@ function Index() {
         <div className="mx-auto flex max-w-5xl items-start justify-between gap-4 px-4 py-6">
           <div>
             <h1 className="text-lg font-semibold leading-tight sm:text-xl">
-              LeadWell Instructional Coach Companion™
+              Companion Education-Coach Edition™
             </h1>
             <p className="text-xs opacity-80 sm:text-sm">
-              The CoachWell Framework™ · Coach with clarity. Support teachers. Protect your well-being.
+              The Companion Ed Framework™ · Coach with clarity. Support teachers. Protect your well-being.
             </p>
           </div>
           <div className="flex flex-col items-end gap-2">
@@ -111,7 +111,7 @@ function Index() {
         </Tabs>
 
         <footer className="mt-12 border-t border-border pt-4 text-center text-xs text-muted-foreground">
-          LeadWell Instructional Coach Companion™ · The CoachWell Framework™ · © 2026
+          Companion Education-Coach Edition™ · The Companion Ed Framework™ · © 2026
           Companion Education · Created by April Stephens Bryson ·
           april@companioneducation.com
         </footer>
