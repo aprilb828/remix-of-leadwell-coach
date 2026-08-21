@@ -143,7 +143,7 @@ function AboutPage() {
                 <Link to="/">Open the app</Link>
               </Button>
               <Button asChild variant="secondary" size="sm">
-                <a href="mailto:april@companioneducation.com">Contact us</a>
+                <Link to="/contact">Contact us</Link>
               </Button>
             </div>
           </CardContent>
