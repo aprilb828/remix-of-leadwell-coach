@@ -202,7 +202,13 @@ export function TourDialog({
               <ChevronLeft className="mr-1 h-4 w-4" /> Back
             </Button>
             {last ? (
-              <Button size="sm" onClick={() => onOpenChange(false)}>
+              <Button
+                size="sm"
+                onClick={() => {
+                  onOpenChange(false);
+                  onStartCoaching?.();
+                }}
+              >
                 Start coaching
               </Button>
             ) : (
