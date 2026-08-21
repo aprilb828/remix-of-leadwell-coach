@@ -30,18 +30,22 @@ const PRINCIPLES = [
   {
     title: "Capture what matters",
     body: "Speak a ten-second note while you're still circulating. No form to fill out, no app to hunt for between classes.",
+    inTheApp: ["Dashboard — Coach Notes", "Teacher & Team Log", "Coaching Plan — Coaching Log", "Walkthroughs — Coaching Cycle Log"],
   },
   {
     title: "Follow through on promises",
     body: "The returned call, the reteach, the check-in you meant to do. Give it a date and it comes back to you instead of slipping.",
+    inTheApp: ["Dashboard — Top 3 Coaching Priorities & End-of-Day Reset", "Coaching Plan — Follow-ups & People Support", "Long-Term Goals", "Communication", "Weekly Reset — Communications to Send"],
   },
   {
     title: "End the day with clarity",
     body: "Your notes become your end-of-day summary. You leave knowing what happened and what tomorrow needs.",
+    inTheApp: ["Dashboard — End-of-Day Reset", "History", "Export Data"],
   },
   {
     title: "Protect your well-being",
     body: "You do not need to do everything. The framework is built to help you decide what actually matters today, and let the rest go.",
+    inTheApp: ["Dashboard — Morning Coach Check-In & Today's Encouragement", "Weekly Reset — Looking Ahead & One Goal for the Week"],
   },
 ];
 
