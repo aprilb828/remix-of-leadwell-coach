@@ -17,6 +17,7 @@ export type Database = {
       daily_reflections: {
         Row: {
           created_at: string
+          device_id: string | null
           entry_date: string
           entry_type: string
           fields: Json
@@ -25,6 +26,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          device_id?: string | null
           entry_date: string
           entry_type: string
           fields?: Json
@@ -33,6 +35,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          device_id?: string | null
           entry_date?: string
           entry_type?: string
           fields?: Json
@@ -45,6 +48,7 @@ export type Database = {
         Row: {
           created_at: string
           details: string | null
+          device_id: string | null
           goal_id: string
           id: string
           summary: string
@@ -54,6 +58,7 @@ export type Database = {
         Insert: {
           created_at?: string
           details?: string | null
+          device_id?: string | null
           goal_id: string
           id?: string
           summary: string
@@ -63,6 +68,7 @@ export type Database = {
         Update: {
           created_at?: string
           details?: string | null
+          device_id?: string | null
           goal_id?: string
           id?: string
           summary?: string
@@ -83,6 +89,7 @@ export type Database = {
         Row: {
           created_at: string
           description: string | null
+          device_id: string | null
           id: string
           status: string
           target_date: string | null
@@ -92,6 +99,7 @@ export type Database = {
         Insert: {
           created_at?: string
           description?: string | null
+          device_id?: string | null
           id?: string
           status?: string
           target_date?: string | null
@@ -101,6 +109,7 @@ export type Database = {
         Update: {
           created_at?: string
           description?: string | null
+          device_id?: string | null
           id?: string
           status?: string
           target_date?: string | null
@@ -115,6 +124,7 @@ export type Database = {
           area: string | null
           created_at: string
           details: string | null
+          device_id: string | null
           follow_up_date: string | null
           follow_up_needed: boolean
           id: string
@@ -128,6 +138,7 @@ export type Database = {
           area?: string | null
           created_at?: string
           details?: string | null
+          device_id?: string | null
           follow_up_date?: string | null
           follow_up_needed?: boolean
           id?: string
@@ -141,6 +152,7 @@ export type Database = {
           area?: string | null
           created_at?: string
           details?: string | null
+          device_id?: string | null
           follow_up_date?: string | null
           follow_up_needed?: boolean
           id?: string

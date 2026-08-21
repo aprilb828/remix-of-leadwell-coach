@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { getDeviceId } from "@/lib/device-id";
 
 export type ReflectionType = "morning" | "eod";
 
@@ -25,6 +26,7 @@ export function useDailyReflection(type: ReflectionType) {
         .select("fields")
         .eq("entry_date", date)
         .eq("entry_type", type)
+        .eq("device_id", getDeviceId())
         .maybeSingle();
       if (error) throw error;
       return (data?.fields as Fields | undefined) ?? {};
@@ -48,8 +50,8 @@ export function useDailyReflection(type: ReflectionType) {
       const { error } = await supabase
         .from("daily_reflections")
         .upsert(
-          { entry_date: date, entry_type: type, fields: next },
-          { onConflict: "entry_date,entry_type" },
+          { device_id: getDeviceId(), entry_date: date, entry_type: type, fields: next },
+          { onConflict: "device_id,entry_date,entry_type" },
         );
       if (!error) {
         qc.invalidateQueries({ queryKey: ["daily_reflections_history"] });
@@ -71,8 +73,8 @@ export function useDailyReflection(type: ReflectionType) {
     await supabase
       .from("daily_reflections")
       .upsert(
-        { entry_date: date, entry_type: type, fields: {} },
-        { onConflict: "entry_date,entry_type" },
+        { device_id: getDeviceId(), entry_date: date, entry_type: type, fields: {} },
+        { onConflict: "device_id,entry_date,entry_type" },
       );
     qc.invalidateQueries({ queryKey });
     qc.invalidateQueries({ queryKey: ["daily_reflections_history"] });
