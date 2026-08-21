@@ -24,7 +24,7 @@ export function StartHere() {
             You do not need to do everything. You need to do what matters.
           </p>
           <p className="text-sm leading-relaxed">
-            The CoachWell Framework™ is here to support you step-by-step. Begin here each morning and allow
+            The Companion Ed Framework™ is here to support you step-by-step. Begin here each morning and allow
             this system to help you focus.
           </p>
           <p className="text-sm font-semibold text-primary">
@@ -68,7 +68,7 @@ export function StartHere() {
       <Card className="border-primary/20">
         <CardHeader className="flex flex-row items-center justify-between space-y-0">
           <CardTitle className="flex items-center gap-2 text-base">
-            <Lightbulb className="h-4 w-4 text-amber-500" /> Coaching · CoachWell Tip
+            <Lightbulb className="h-4 w-4 text-amber-500" /> Coaching · Companion Ed Tip
           </CardTitle>
           <Button variant="ghost" size="sm" onClick={() => setTipIdx((i) => (i + 1) % TIPS.length)}>
             <RotateCcw className="mr-1 h-3 w-3" /> See another tip
