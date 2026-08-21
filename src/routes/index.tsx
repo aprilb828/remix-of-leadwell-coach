@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
@@ -12,8 +12,10 @@ import { WeeklyReset } from "@/components/sections/WeeklyReset";
 import { History } from "@/components/sections/History";
 import { Goals } from "@/components/sections/Goals";
 import { useLocalStorage } from "@/hooks/use-local-storage";
-import { Eye, EyeOff } from "lucide-react";
+import { Compass, Info } from "lucide-react";
 import { ExportData } from "@/components/ExportData";
+import { TourDialog, useTour } from "@/components/TourDialog";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
