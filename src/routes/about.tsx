@@ -86,9 +86,10 @@ function AboutPage() {
             <p className="text-sm leading-relaxed text-muted-foreground">
               April Stephens Bryson is a former principal with 29 years of experience in education.
               She built Companion Education™ from real experience with school leaders and teachers
-              who carry too much every day. Her mission is simple: give educators a steady,
-              voice-first companion that helps them capture what matters, follow through on
-              promises, and end each day with clarity — not guilt.
+              who carry too much every day. After 22 years in the classroom and seven in
+              administration, her mission is simple: give educators a steady, voice-first companion
+              that helps them capture what matters, follow through on promises, and end each day with
+              clarity —not guilt.
             </p>
           </div>
         </section>
