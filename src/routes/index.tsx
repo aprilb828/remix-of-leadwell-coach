@@ -44,6 +44,7 @@ const TABS = [
 
 function Index() {
   const tour = useTour();
+  const [activeTab, setActiveTab] = useState("dashboard");
 
   const today = new Date();
   const dateLine = today.toLocaleDateString("en-US", {
@@ -58,6 +59,7 @@ function Index() {
         open={tour.open}
         onOpenChange={tour.setOpen}
         onDismissForever={() => tour.setDismissed(true)}
+        onStartCoaching={() => setActiveTab("dashboard")}
       />
       <header className="bg-primary text-primary-foreground">
         <div className="mx-auto flex max-w-5xl items-start justify-between gap-4 px-4 py-6">
