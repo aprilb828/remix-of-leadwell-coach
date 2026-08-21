@@ -100,6 +100,72 @@ export function ExportData() {
     }
   };
 
+  const handlePDF = async () => {
+    setLoading(true);
+    try {
+      const { jsPDF } = await import("jspdf");
+      const datasets = await fetchAll();
+      const doc = new jsPDF({ unit: "pt", format: "letter" });
+      const margin = 40;
+      const width = doc.internal.pageSize.getWidth() - margin * 2;
+      const bottom = doc.internal.pageSize.getHeight() - margin;
+      let y = margin;
+
+      const nextLine = (h: number) => {
+        if (y + h > bottom) {
+          doc.addPage();
+          y = margin;
+        }
+      };
+
+      doc.setFontSize(16);
+      doc.text("Companion Education-Coach Edition", margin, y);
+      y += 18;
+      doc.setFontSize(10);
+      doc.setTextColor(120);
+      doc.text(`Data export · ${stamp()}`, margin, y);
+      doc.setTextColor(0);
+      y += 24;
+
+      for (const ds of datasets) {
+        nextLine(30);
+        doc.setFontSize(13);
+        doc.text(ds.name.replace(/_/g, " "), margin, y);
+        y += 16;
+        doc.setFontSize(9);
+
+        if (!ds.rows.length) {
+          nextLine(14);
+          doc.setTextColor(120);
+          doc.text("No data", margin, y);
+          doc.setTextColor(0);
+          y += 20;
+          continue;
+        }
+
+        for (const row of ds.rows) {
+          const text = Object.entries(row)
+            .filter(([, v]) => v !== null && v !== "" && v !== undefined)
+            .map(([k, v]) => `${k}: ${String(v)}`)
+            .join(" · ");
+          const lines = doc.splitTextToSize(text, width) as string[];
+          nextLine(lines.length * 11 + 8);
+          doc.text(lines, margin, y);
+          y += lines.length * 11 + 8;
+        }
+        y += 10;
+      }
+
+      doc.save(`coachwell-export-${stamp()}.pdf`);
+      toast.success("PDF export ready");
+    } catch (e) {
+      console.error(e);
+      toast.error("Export failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -111,7 +177,9 @@ export function ExportData() {
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={handleExcel}>Excel (.xlsx)</DropdownMenuItem>
         <DropdownMenuItem onClick={handleCSV}>CSV (.csv)</DropdownMenuItem>
+        <DropdownMenuItem onClick={handlePDF}>PDF (.pdf)</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
+
