@@ -32,7 +32,7 @@ export const Route = createFileRoute("/")({
 });
 
 const TABS = [
-  { value: "start", label: "ℹ️ Start Here" },
+
   { value: "dashboard", label: "🏠 Dashboard" },
   { value: "log", label: "👥 Teacher & Team Log" },
   { value: "plan", label: "🧭 Coaching Plan" },
