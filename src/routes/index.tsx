@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
@@ -12,8 +12,10 @@ import { WeeklyReset } from "@/components/sections/WeeklyReset";
 import { History } from "@/components/sections/History";
 import { Goals } from "@/components/sections/Goals";
 import { useLocalStorage } from "@/hooks/use-local-storage";
-import { Eye, EyeOff } from "lucide-react";
+import { Compass, Info } from "lucide-react";
 import { ExportData } from "@/components/ExportData";
+import { TourDialog, useTour } from "@/components/TourDialog";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,7 +44,8 @@ const TABS = [
 ];
 
 function Index() {
-  const [hideStart, setHideStart] = useLocalStorage("cw.hideStartTab", false);
+  const [hideStart] = useLocalStorage("cw.hideStartTab", false);
+  const tour = useTour();
   const today = new Date();
   const dateLine = today.toLocaleDateString("en-US", {
     year: "numeric", month: "long", day: "numeric",
@@ -52,6 +55,11 @@ function Index() {
   return (
     <div className="min-h-screen bg-background">
       <Toaster richColors position="top-center" />
+      <TourDialog
+        open={tour.open}
+        onOpenChange={tour.setOpen}
+        onDismissForever={() => tour.setDismissed(true)}
+      />
       <header className="bg-primary text-primary-foreground">
         <div className="mx-auto flex max-w-5xl items-start justify-between gap-4 px-4 py-6">
           <div>
@@ -72,16 +80,23 @@ function Index() {
               <Button
                 variant="secondary"
                 size="sm"
-                onClick={() => setHideStart(!hideStart)}
+                onClick={() => tour.setOpen(true)}
                 className="h-7 gap-1 text-xs"
               >
-                {hideStart ? <Eye className="h-3 w-3" /> : <EyeOff className="h-3 w-3" />}
-                {hideStart ? "Show Start" : "Hide Start"}
+                <Compass className="h-3 w-3" />
+                Tour
+              </Button>
+              <Button asChild variant="secondary" size="sm" className="h-7 gap-1 text-xs">
+                <Link to="/about">
+                  <Info className="h-3 w-3" />
+                  About
+                </Link>
               </Button>
             </div>
           </div>
         </div>
       </header>
+
 
       <main className="mx-auto max-w-5xl px-3 py-6 sm:px-4">
         <Tabs defaultValue={hideStart ? "dashboard" : "start"} className="w-full">
