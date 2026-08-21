@@ -90,6 +90,93 @@ export function Dashboard() {
   );
 }
 
+function CalendarCard() {
+  const [hidden, setHidden] = useLocalStorage("cw.calendar-card.hidden", false);
+  if (hidden) return null;
+
+  return (
+    <Card>
+      <CardContent className="flex items-center gap-4 py-4">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+          <CalendarIcon className="h-5 w-5" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h3 className="text-sm font-semibold">Access your calendar</h3>
+          <p className="text-xs text-muted-foreground">
+            Follow ups download as a calendar file you can open in Google or Outlook.
+          </p>
+        </div>
+        <div className="hidden sm:flex items-center gap-2">
+          <Button
+            variant="default"
+            size="sm"
+            className="h-8 gap-1 text-xs"
+            asChild
+          >
+            <a href="https://calendar.google.com" target="_blank" rel="noreferrer">
+              <CalendarIcon className="h-3.5 w-3.5" />
+              Open Google Calendar
+            </a>
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-8 gap-1 text-xs"
+            asChild
+          >
+            <a href="https://outlook.live.com/calendar" target="_blank" rel="noreferrer">
+              <CalendarIcon className="h-3.5 w-3.5" />
+              Open Outlook Calendar
+            </a>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8 shrink-0"
+            onClick={() => setHidden(true)}
+            aria-label="Dismiss calendar card"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
+        <div className="flex sm:hidden flex-col items-end gap-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8 shrink-0"
+            onClick={() => setHidden(true)}
+            aria-label="Dismiss calendar card"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="default"
+            size="sm"
+            className="h-8 gap-1 text-xs"
+            asChild
+          >
+            <a href="https://calendar.google.com" target="_blank" rel="noreferrer">
+              <CalendarIcon className="h-3.5 w-3.5" />
+              Google
+            </a>
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-8 gap-1 text-xs"
+            asChild
+          >
+            <a href="https://outlook.live.com/calendar" target="_blank" rel="noreferrer">
+              <CalendarIcon className="h-3.5 w-3.5" />
+              Outlook
+            </a>
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 function PriorityItem({ idx }: { idx: number }) {
   const [text, setText] = useLocalStorage(`cw.priority.${idx}.text`, "");
   const [done, setDone] = useLocalStorage(`cw.priority.${idx}.done`, false);
