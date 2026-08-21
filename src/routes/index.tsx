@@ -99,10 +99,10 @@ function Index() {
 
 
       <main className="mx-auto max-w-5xl px-3 py-6 sm:px-4">
-        <Tabs defaultValue={hideStart ? "dashboard" : "start"} className="w-full">
+        <Tabs defaultValue="dashboard" className="w-full">
           <div className="-mx-3 overflow-x-auto px-3 sm:mx-0 sm:px-0">
             <TabsList className="h-auto w-max bg-muted/60 p-1">
-              {TABS.filter((t) => !hideStart || t.value !== "start").map((t) => (
+              {TABS.map((t) => (
                 <TabsTrigger key={t.value} value={t.value} className="whitespace-nowrap text-xs sm:text-sm">
                   {t.label}
                 </TabsTrigger>
@@ -111,9 +111,7 @@ function Index() {
           </div>
 
           <div className="mt-6">
-            {!hideStart && (
-              <TabsContent value="start"><StartHere /></TabsContent>
-            )}
+
             <TabsContent value="dashboard"><Dashboard /></TabsContent>
             <TabsContent value="log"><VoiceCommand /></TabsContent>
             <TabsContent value="plan"><CoachingPlan /></TabsContent>
