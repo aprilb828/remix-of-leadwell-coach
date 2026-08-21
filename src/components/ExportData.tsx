@@ -9,16 +9,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Download } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { getDeviceId } from "@/lib/device-id";
 import { toast } from "sonner";
 
 type Dataset = { name: string; rows: Record<string, unknown>[] };
 
 async function fetchAll(): Promise<Dataset[]> {
   const [reflections, goals, updates, voice] = await Promise.all([
-    supabase.from("daily_reflections").select("*").order("entry_date", { ascending: false }),
-    supabase.from("long_term_goals").select("*").order("created_at", { ascending: false }),
-    supabase.from("goal_updates").select("*").order("created_at", { ascending: false }),
-    supabase.from("voice_entries").select("*").order("created_at", { ascending: false }),
+    supabase.from("daily_reflections").select("*").eq("device_id", getDeviceId()).order("entry_date", { ascending: false }),
+    supabase.from("long_term_goals").select("*").eq("device_id", getDeviceId()).order("created_at", { ascending: false }),
+    supabase.from("goal_updates").select("*").eq("device_id", getDeviceId()).order("created_at", { ascending: false }),
+    supabase.from("voice_entries").select("*").eq("device_id", getDeviceId()).order("created_at", { ascending: false }),
   ]);
 
   const flatten = (rows: any[] | null) =>

@@ -20,6 +20,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 
 import { supabase } from "@/integrations/supabase/client";
+import { getDeviceId } from "@/lib/device-id";
 import {
   VoiceRecorder,
   isVoiceRecordingSupported,
@@ -93,6 +94,7 @@ export function VoiceCommand() {
       const { data, error } = await supabase
         .from("voice_entries")
         .select("*")
+        .eq("device_id", getDeviceId())
         .order("created_at", { ascending: false })
         .limit(50);
       if (error) throw error;
@@ -142,6 +144,7 @@ export function VoiceCommand() {
   const saveMutation = useMutation({
     mutationFn: async (d: Draft) => {
       const { error } = await supabase.from("voice_entries").insert({
+        device_id: getDeviceId(),
         log_type: d.log_type,
         name: d.name || null,
         area: d.area || null,
@@ -168,7 +171,7 @@ export function VoiceCommand() {
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase.from("voice_entries").delete().eq("id", id);
+      const { error } = await supabase.from("voice_entries").delete().eq("id", id).eq("device_id", getDeviceId());
       if (error) throw error;
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ["voice_entries"] }),

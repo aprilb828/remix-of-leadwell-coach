@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 
 import { supabase } from "@/integrations/supabase/client";
+import { getDeviceId } from "@/lib/device-id";
 import { VoiceRecorder, isVoiceRecordingSupported } from "@/lib/voice-recorder";
 import { transcribeAudio } from "@/lib/voice.functions";
 
@@ -57,6 +58,7 @@ export function Goals() {
       const { data, error } = await supabase
         .from("long_term_goals")
         .select("*")
+        .eq("device_id", getDeviceId())
         .order("created_at", { ascending: false });
       if (error) throw error;
       return data as Goal[];
@@ -65,7 +67,7 @@ export function Goals() {
 
   const deleteGoal = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase.from("long_term_goals").delete().eq("id", id);
+      const { error } = await supabase.from("long_term_goals").delete().eq("id", id).eq("device_id", getDeviceId());
       if (error) throw error;
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ["long_term_goals"] }),
@@ -76,7 +78,8 @@ export function Goals() {
       const { error } = await supabase
         .from("long_term_goals")
         .update({ status: args.status })
-        .eq("id", args.id);
+        .eq("id", args.id)
+        .eq("device_id", getDeviceId());
       if (error) throw error;
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ["long_term_goals"] }),
@@ -157,6 +160,7 @@ function NewGoalForm({ onDone }: { onDone: () => void }) {
     mutationFn: async () => {
       if (!title.trim()) throw new Error("Title is required");
       const { error } = await supabase.from("long_term_goals").insert({
+        device_id: getDeviceId(),
         title: title.trim(),
         description: description.trim() || null,
         target_date: target || null,
@@ -208,7 +212,7 @@ function GoalLog({ goalId }: { goalId: string }) {
     queryKey: ["goal_updates", goalId],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("goal_updates").select("*").eq("goal_id", goalId).order("created_at", { ascending: false });
+        .from("goal_updates").select("*").eq("goal_id", goalId).eq("device_id", getDeviceId()).order("created_at", { ascending: false });
       if (error) throw error;
       return data as Update[];
     },
@@ -218,6 +222,7 @@ function GoalLog({ goalId }: { goalId: string }) {
     mutationFn: async () => {
       if (!summary.trim()) throw new Error("Add a short summary");
       const { error } = await supabase.from("goal_updates").insert({
+        device_id: getDeviceId(),
         goal_id: goalId, update_type: type, summary: summary.trim(), details: details.trim() || null,
       });
       if (error) throw error;
@@ -231,7 +236,7 @@ function GoalLog({ goalId }: { goalId: string }) {
 
   const del = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase.from("goal_updates").delete().eq("id", id);
+      const { error } = await supabase.from("goal_updates").delete().eq("id", id).eq("device_id", getDeviceId());
       if (error) throw error;
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ["goal_updates", goalId] }),
@@ -333,6 +338,7 @@ function VoiceGoalUpdate({ goals }: { goals: Goal[] }) {
       if (!transcript.trim()) throw new Error("Transcript is empty");
       const summary = transcript.length > 90 ? transcript.slice(0, 90).trim() + "…" : transcript;
       const { error } = await supabase.from("goal_updates").insert({
+        device_id: getDeviceId(),
         goal_id: goalId, update_type: type, summary, details: transcript, transcript,
       });
       if (error) throw error;

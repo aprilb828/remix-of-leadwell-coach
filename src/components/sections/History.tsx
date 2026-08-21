@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
+import { getDeviceId } from "@/lib/device-id";
 
 const MORNING_LABELS: Record<string, string> = {
   encourage: "Encourage",
@@ -31,6 +32,7 @@ export function History() {
       const { data, error } = await supabase
         .from("daily_reflections")
         .select("*")
+        .eq("device_id", getDeviceId())
         .order("entry_date", { ascending: false })
         .limit(60);
       if (error) throw error;
