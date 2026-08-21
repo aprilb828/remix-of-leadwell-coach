@@ -59,7 +59,7 @@ export function StartHere() {
             <li>"Walkthrough note for Mr. Lee — strong student discourse during math, recognize tomorrow."</li>
           </ul>
           <p className="text-xs text-muted-foreground">
-            Lovable AI parses your words and pre-fills the form. You review and save — done in seconds.
+            This app parses your words and pre-fills the form. You review and save — done in seconds.
             Works on iPad, iPhone Safari, Chrome &amp; Edge.
           </p>
         </CardContent>
