@@ -159,10 +159,12 @@ export function TourDialog({
   open,
   onOpenChange,
   onDismissForever,
+  onStartCoaching,
 }: {
   open: boolean;
   onOpenChange: (v: boolean) => void;
   onDismissForever: () => void;
+  onStartCoaching?: () => void;
 }) {
   const [i, setI] = useState(0);
   const slide = TOUR_SLIDES[i];
