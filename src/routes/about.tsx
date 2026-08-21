@@ -125,9 +125,17 @@ function AboutPage() {
           <div className="grid gap-3 sm:grid-cols-2">
             {PRINCIPLES.map((p) => (
               <Card key={p.title}>
-                <CardContent className="space-y-1 pt-5">
+                <CardContent className="space-y-2 pt-5">
                   <h3 className="text-sm font-semibold">{p.title}</h3>
                   <p className="text-xs leading-relaxed text-muted-foreground">{p.body}</p>
+                  <div>
+                    <h4 className="text-xs font-semibold text-primary">How this looks in the app</h4>
+                    <ul className="mt-1 list-disc space-y-0.5 pl-4 text-xs text-muted-foreground">
+                      {p.inTheApp.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
             ))}
