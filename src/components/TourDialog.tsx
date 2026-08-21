@@ -159,10 +159,12 @@ export function TourDialog({
   open,
   onOpenChange,
   onDismissForever,
+  onStartCoaching,
 }: {
   open: boolean;
   onOpenChange: (v: boolean) => void;
   onDismissForever: () => void;
+  onStartCoaching?: () => void;
 }) {
   const [i, setI] = useState(0);
   const slide = TOUR_SLIDES[i];
@@ -200,7 +202,13 @@ export function TourDialog({
               <ChevronLeft className="mr-1 h-4 w-4" /> Back
             </Button>
             {last ? (
-              <Button size="sm" onClick={() => onOpenChange(false)}>
+              <Button
+                size="sm"
+                onClick={() => {
+                  onOpenChange(false);
+                  onStartCoaching?.();
+                }}
+              >
                 Start coaching
               </Button>
             ) : (

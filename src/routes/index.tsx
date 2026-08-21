@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
@@ -43,6 +44,7 @@ const TABS = [
 
 function Index() {
   const tour = useTour();
+  const [activeTab, setActiveTab] = useState("dashboard");
 
   const today = new Date();
   const dateLine = today.toLocaleDateString("en-US", {
@@ -57,6 +59,7 @@ function Index() {
         open={tour.open}
         onOpenChange={tour.setOpen}
         onDismissForever={() => tour.setDismissed(true)}
+        onStartCoaching={() => setActiveTab("dashboard")}
       />
       <header className="bg-primary text-primary-foreground">
         <div className="mx-auto flex max-w-5xl items-start justify-between gap-4 px-4 py-6">
@@ -97,7 +100,7 @@ function Index() {
 
 
       <main className="mx-auto max-w-5xl px-3 py-6 sm:px-4">
-        <Tabs defaultValue="dashboard" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <div className="-mx-3 overflow-x-auto px-3 sm:mx-0 sm:px-0">
             <TabsList className="h-auto w-max bg-muted/60 p-1">
               {TABS.map((t) => (
