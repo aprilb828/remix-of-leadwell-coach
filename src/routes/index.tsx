@@ -44,8 +44,8 @@ const TABS = [
 ];
 
 function Index() {
-  const [hideStart] = useLocalStorage("cw.hideStartTab", false);
   const tour = useTour();
+
   const today = new Date();
   const dateLine = today.toLocaleDateString("en-US", {
     year: "numeric", month: "long", day: "numeric",
