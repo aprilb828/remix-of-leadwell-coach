@@ -100,7 +100,7 @@ function Index() {
 
 
       <main className="mx-auto max-w-5xl px-3 py-6 sm:px-4">
-        <Tabs defaultValue="dashboard" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <div className="-mx-3 overflow-x-auto px-3 sm:mx-0 sm:px-0">
             <TabsList className="h-auto w-max bg-muted/60 p-1">
               {TABS.map((t) => (
