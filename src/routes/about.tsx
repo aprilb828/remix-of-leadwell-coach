@@ -33,7 +33,7 @@ const PRINCIPLES = [
   },
   {
     title: "Follow through on promises",
-    body: "The call home, the reteach, the check-in you meant to do. Give it a date and it comes back to you instead of slipping.",
+    body: "The returned call, the reteach, the check-in you meant to do. Give it a date and it comes back to you instead of slipping.",
   },
   {
     title: "End the day with clarity",
