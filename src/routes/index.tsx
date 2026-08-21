@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
-import { StartHere } from "@/components/sections/StartHere";
 import { Dashboard } from "@/components/sections/Dashboard";
 import { VoiceCommand } from "@/components/VoiceCommand";
 import { CoachingPlan } from "@/components/sections/CoachingPlan";
@@ -11,7 +10,6 @@ import { Communication } from "@/components/sections/Communication";
 import { WeeklyReset } from "@/components/sections/WeeklyReset";
 import { History } from "@/components/sections/History";
 import { Goals } from "@/components/sections/Goals";
-import { useLocalStorage } from "@/hooks/use-local-storage";
 import { Compass, Info } from "lucide-react";
 import { ExportData } from "@/components/ExportData";
 import { TourDialog, useTour } from "@/components/TourDialog";
@@ -32,7 +30,7 @@ export const Route = createFileRoute("/")({
 });
 
 const TABS = [
-  { value: "start", label: "ℹ️ Start Here" },
+
   { value: "dashboard", label: "🏠 Dashboard" },
   { value: "log", label: "👥 Teacher & Team Log" },
   { value: "plan", label: "🧭 Coaching Plan" },
@@ -44,8 +42,8 @@ const TABS = [
 ];
 
 function Index() {
-  const [hideStart] = useLocalStorage("cw.hideStartTab", false);
   const tour = useTour();
+
   const today = new Date();
   const dateLine = today.toLocaleDateString("en-US", {
     year: "numeric", month: "long", day: "numeric",
@@ -99,10 +97,10 @@ function Index() {
 
 
       <main className="mx-auto max-w-5xl px-3 py-6 sm:px-4">
-        <Tabs defaultValue={hideStart ? "dashboard" : "start"} className="w-full">
+        <Tabs defaultValue="dashboard" className="w-full">
           <div className="-mx-3 overflow-x-auto px-3 sm:mx-0 sm:px-0">
             <TabsList className="h-auto w-max bg-muted/60 p-1">
-              {TABS.filter((t) => !hideStart || t.value !== "start").map((t) => (
+              {TABS.map((t) => (
                 <TabsTrigger key={t.value} value={t.value} className="whitespace-nowrap text-xs sm:text-sm">
                   {t.label}
                 </TabsTrigger>
@@ -111,9 +109,7 @@ function Index() {
           </div>
 
           <div className="mt-6">
-            {!hideStart && (
-              <TabsContent value="start"><StartHere /></TabsContent>
-            )}
+
             <TabsContent value="dashboard"><Dashboard /></TabsContent>
             <TabsContent value="log"><VoiceCommand /></TabsContent>
             <TabsContent value="plan"><CoachingPlan /></TabsContent>
