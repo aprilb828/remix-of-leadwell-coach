@@ -9,6 +9,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { ArrowLeft } from "lucide-react";
+import appleLogo from "@/assets/companion-apple.png";
+import { SiteFooter } from "@/components/SiteFooter";
+
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -71,13 +74,21 @@ function ContactPage() {
       <Toaster richColors position="top-center" />
       <header className="bg-primary text-primary-foreground">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-5">
-          <div>
-            <p className="text-xs uppercase tracking-wide opacity-80">Contact</p>
-            <h1 className="text-lg font-semibold sm:text-xl">Need more personalized support?</h1>
+          <div className="flex items-start gap-3">
+            <img
+              src={appleLogo}
+              alt="Companion Education apple mark"
+              className="h-11 w-11 shrink-0 rounded-xl bg-primary-foreground/10 p-1"
+            />
+            <div>
+              <p className="text-xs uppercase tracking-wide opacity-80">Contact</p>
+              <h1 className="text-lg font-semibold sm:text-xl">Need more personalized support?</h1>
+            </div>
           </div>
-          <Button asChild variant="secondary" size="sm" className="h-7 gap-1 text-xs">
+          <Button asChild variant="secondary" size="sm" className="h-7 gap-1 rounded-full px-3 text-xs">
             <Link to="/about">
               <ArrowLeft className="h-3 w-3" /> Back to about
+
             </Link>
           </Button>
         </div>
@@ -139,7 +150,10 @@ function ContactPage() {
           </a>
           .
         </p>
+
+        <SiteFooter />
       </main>
+
     </div>
   );
 }

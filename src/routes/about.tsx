@@ -3,6 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import headshot from "@/assets/april-bryson-headshot.png.asset.json";
+import appleLogo from "@/assets/companion-apple.png";
+import { SiteFooter } from "@/components/SiteFooter";
+
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -54,19 +57,27 @@ function AboutPage() {
     <div className="min-h-screen bg-background">
       <header className="bg-primary text-primary-foreground">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-5">
-          <div>
-            <p className="text-xs uppercase tracking-wide opacity-80">About us</p>
-            <h1 className="text-lg font-semibold sm:text-xl">
-              Built by an educator who carried the same load
-            </h1>
+          <div className="flex items-start gap-3">
+            <img
+              src={appleLogo}
+              alt="Companion Education apple mark"
+              className="h-11 w-11 shrink-0 rounded-xl bg-primary-foreground/10 p-1"
+            />
+            <div>
+              <p className="text-xs uppercase tracking-wide opacity-80">About us</p>
+              <h1 className="text-lg font-semibold sm:text-xl">
+                Built by an educator who carried the same load
+              </h1>
+            </div>
           </div>
-          <Button asChild variant="secondary" size="sm" className="h-7 gap-1 text-xs">
+          <Button asChild variant="secondary" size="sm" className="h-7 gap-1 rounded-full px-3 text-xs">
             <Link to="/">
               <ArrowLeft className="h-3 w-3" /> Back to app
             </Link>
           </Button>
         </div>
       </header>
+
 
       <main className="mx-auto max-w-3xl space-y-8 px-4 py-8">
         <Card className="border-none bg-primary text-primary-foreground">
@@ -161,10 +172,8 @@ function AboutPage() {
           </CardContent>
         </Card>
 
-        <footer className="border-t border-border pt-4 text-center text-xs text-muted-foreground">
-          Companion Education-Coach Edition™ · The Companion Ed Framework™ · © 2026 Companion
-          Education · Created by April Stephens Bryson
-        </footer>
+        <SiteFooter />
+
       </main>
     </div>
   );

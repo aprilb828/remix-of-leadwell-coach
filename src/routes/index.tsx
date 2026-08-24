@@ -14,6 +14,9 @@ import { Goals } from "@/components/sections/Goals";
 import { Compass, Info } from "lucide-react";
 import { ExportData } from "@/components/ExportData";
 import { TourDialog, useTour } from "@/components/TourDialog";
+import { SiteFooter } from "@/components/SiteFooter";
+import appleLogo from "@/assets/companion-apple.png";
+
 
 
 export const Route = createFileRoute("/")({
@@ -63,34 +66,41 @@ function Index() {
       />
       <header className="bg-primary text-primary-foreground">
         <div className="mx-auto flex max-w-5xl items-start justify-between gap-4 px-4 py-6">
-          <div>
-            <h1 className="text-lg font-semibold leading-tight sm:text-xl">
-              Companion Education-Coach Edition™
-            </h1>
-            <p className="text-xs opacity-80 sm:text-sm">
-              The Companion Ed Framework™ · Coach with clarity. Support teachers. Protect your well-being.
-            </p>
+          <div className="flex items-start gap-3">
+            <img
+              src={appleLogo}
+              alt="Companion Education apple mark"
+              className="h-11 w-11 shrink-0 rounded-xl bg-primary-foreground/10 p-1"
+            />
+            <div>
+              <h1 className="text-lg font-semibold leading-tight sm:text-xl">
+                Companion Education-Coach Edition™
+              </h1>
+              <p className="text-xs opacity-80 sm:text-sm">
+                The Companion Ed Framework™ · Coach with clarity. Support teachers. Protect your well-being.
+              </p>
+            </div>
           </div>
           <div className="flex flex-col items-end gap-2">
             <div className="text-right text-xs sm:text-sm">
               <div className="font-semibold">{dateLine}</div>
               <div className="opacity-80">{weekday}</div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap justify-end gap-2">
               <ExportData />
               <Button
                 variant="secondary"
                 size="sm"
                 onClick={() => tour.setOpen(true)}
-                className="h-7 gap-1 text-xs"
+                className="h-7 gap-1 rounded-full px-3 text-xs"
               >
                 <Compass className="h-3 w-3" />
                 Tour
               </Button>
-              <Button asChild variant="secondary" size="sm" className="h-7 gap-1 text-xs">
+              <Button asChild variant="secondary" size="sm" className="h-7 gap-1 rounded-full px-3 text-xs">
                 <Link to="/about">
                   <Info className="h-3 w-3" />
-                  About
+                  Framework
                 </Link>
               </Button>
             </div>
@@ -99,16 +109,22 @@ function Index() {
       </header>
 
 
+
       <main className="mx-auto max-w-5xl px-3 py-6 sm:px-4">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <div className="-mx-3 overflow-x-auto px-3 sm:mx-0 sm:px-0">
-            <TabsList className="h-auto w-max bg-muted/60 p-1">
+            <TabsList className="h-auto w-max gap-1 rounded-full bg-surface p-1.5">
               {TABS.map((t) => (
-                <TabsTrigger key={t.value} value={t.value} className="whitespace-nowrap text-xs sm:text-sm">
+                <TabsTrigger
+                  key={t.value}
+                  value={t.value}
+                  className="whitespace-nowrap rounded-full px-4 py-2 text-xs data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                >
                   {t.label}
                 </TabsTrigger>
               ))}
             </TabsList>
+
           </div>
 
           <div className="mt-6">
@@ -124,12 +140,9 @@ function Index() {
           </div>
         </Tabs>
 
-        <footer className="mt-12 border-t border-border pt-4 text-center text-xs text-muted-foreground">
-          Companion Education-Coach Edition™ · The Companion Ed Framework™ · © 2026
-          Companion Education · Created by April Stephens Bryson ·
-          april@companioneducation.com
-        </footer>
+        <SiteFooter />
       </main>
     </div>
   );
 }
+
