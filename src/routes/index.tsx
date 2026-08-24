@@ -113,13 +113,18 @@ function Index() {
       <main className="mx-auto max-w-5xl px-3 py-6 sm:px-4">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <div className="-mx-3 overflow-x-auto px-3 sm:mx-0 sm:px-0">
-            <TabsList className="h-auto w-max bg-muted/60 p-1">
+            <TabsList className="h-auto w-max gap-1 rounded-full bg-surface p-1.5">
               {TABS.map((t) => (
-                <TabsTrigger key={t.value} value={t.value} className="whitespace-nowrap text-xs sm:text-sm">
+                <TabsTrigger
+                  key={t.value}
+                  value={t.value}
+                  className="whitespace-nowrap rounded-full px-4 py-2 text-xs data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                >
                   {t.label}
                 </TabsTrigger>
               ))}
             </TabsList>
+
           </div>
 
           <div className="mt-6">
