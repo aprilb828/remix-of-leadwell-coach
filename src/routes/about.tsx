@@ -161,10 +161,8 @@ function AboutPage() {
           </CardContent>
         </Card>
 
-        <footer className="border-t border-border pt-4 text-center text-xs text-muted-foreground">
-          Companion Education-Coach Edition™ · The Companion Ed Framework™ · © 2026 Companion
-          Education · Created by April Stephens Bryson
-        </footer>
+        <SiteFooter />
+
       </main>
     </div>
   );
