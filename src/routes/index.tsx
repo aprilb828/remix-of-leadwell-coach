@@ -63,40 +63,48 @@ function Index() {
       />
       <header className="bg-primary text-primary-foreground">
         <div className="mx-auto flex max-w-5xl items-start justify-between gap-4 px-4 py-6">
-          <div>
-            <h1 className="text-lg font-semibold leading-tight sm:text-xl">
-              Companion Education-Coach Edition™
-            </h1>
-            <p className="text-xs opacity-80 sm:text-sm">
-              The Companion Ed Framework™ · Coach with clarity. Support teachers. Protect your well-being.
-            </p>
+          <div className="flex items-start gap-3">
+            <img
+              src={appleLogo}
+              alt="Companion Education apple mark"
+              className="h-11 w-11 shrink-0 rounded-xl bg-primary-foreground/10 p-1"
+            />
+            <div>
+              <h1 className="text-lg font-semibold leading-tight sm:text-xl">
+                Companion Education-Coach Edition™
+              </h1>
+              <p className="text-xs opacity-80 sm:text-sm">
+                The Companion Ed Framework™ · Coach with clarity. Support teachers. Protect your well-being.
+              </p>
+            </div>
           </div>
           <div className="flex flex-col items-end gap-2">
             <div className="text-right text-xs sm:text-sm">
               <div className="font-semibold">{dateLine}</div>
               <div className="opacity-80">{weekday}</div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap justify-end gap-2">
               <ExportData />
               <Button
                 variant="secondary"
                 size="sm"
                 onClick={() => tour.setOpen(true)}
-                className="h-7 gap-1 text-xs"
+                className="h-7 gap-1 rounded-full px-3 text-xs"
               >
                 <Compass className="h-3 w-3" />
                 Tour
               </Button>
-              <Button asChild variant="secondary" size="sm" className="h-7 gap-1 text-xs">
+              <Button asChild variant="secondary" size="sm" className="h-7 gap-1 rounded-full px-3 text-xs">
                 <Link to="/about">
                   <Info className="h-3 w-3" />
-                  About
+                  Framework
                 </Link>
               </Button>
             </div>
           </div>
         </div>
       </header>
+
 
 
       <main className="mx-auto max-w-5xl px-3 py-6 sm:px-4">
