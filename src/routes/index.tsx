@@ -140,12 +140,9 @@ function Index() {
           </div>
         </Tabs>
 
-        <footer className="mt-12 border-t border-border pt-4 text-center text-xs text-muted-foreground">
-          Companion Education-Coach Edition™ · The Companion Ed Framework™ · © 2026
-          Companion Education · Created by April Stephens Bryson ·
-          april@companioneducation.com
-        </footer>
+        <SiteFooter />
       </main>
     </div>
   );
 }
+
