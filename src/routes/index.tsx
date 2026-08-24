@@ -14,6 +14,9 @@ import { Goals } from "@/components/sections/Goals";
 import { Compass, Info } from "lucide-react";
 import { ExportData } from "@/components/ExportData";
 import { TourDialog, useTour } from "@/components/TourDialog";
+import { SiteFooter } from "@/components/SiteFooter";
+import appleLogo from "@/assets/companion-apple.png";
+
 
 
 export const Route = createFileRoute("/")({
