@@ -9,6 +9,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { ArrowLeft } from "lucide-react";
+import appleLogo from "@/assets/companion-apple.png";
+import { SiteFooter } from "@/components/SiteFooter";
+
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
