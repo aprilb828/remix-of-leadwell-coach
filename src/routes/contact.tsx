@@ -150,7 +150,10 @@ function ContactPage() {
           </a>
           .
         </p>
+
+        <SiteFooter />
       </main>
+
     </div>
   );
 }
