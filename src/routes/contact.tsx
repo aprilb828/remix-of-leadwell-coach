@@ -111,7 +111,7 @@ function ContactPage() {
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="email" className="text-xs">Email</Label>
-                  <Input id="email" type="email" value={form.email} onChange={set("email")} maxLength={255} placeholder="you@school.org" />
+                  <Input id="email" type="email" value={form.email} onChange={set("email")} maxLength={255} placeholder="you@youremail.com" />
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="role" className="text-xs">Role (optional)</Label>
