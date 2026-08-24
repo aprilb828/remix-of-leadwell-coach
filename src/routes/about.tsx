@@ -3,6 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import headshot from "@/assets/april-bryson-headshot.png.asset.json";
+import appleLogo from "@/assets/companion-apple.png";
+import { SiteFooter } from "@/components/SiteFooter";
+
 
 export const Route = createFileRoute("/about")({
   head: () => ({
