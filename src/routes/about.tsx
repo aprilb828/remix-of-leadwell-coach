@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import headshot from "@/assets/april-bryson-headshot.png.asset.json";
+import headshot from "@/assets/april-bryson-headshot.png";
 import appleLogo from "@/assets/companion-apple.png";
 import { SiteFooter } from "@/components/SiteFooter";
 
@@ -93,7 +93,7 @@ function AboutPage() {
           <h2 className="text-sm font-semibold text-primary">Our founder</h2>
           <div className="flex flex-col gap-4 sm:flex-row">
             <img
-              src={headshot.url}
+              src={headshot}
               alt="April Stephens Bryson, founder of Companion Education"
               loading="lazy"
               className="h-32 w-32 shrink-0 rounded-md object-cover"
