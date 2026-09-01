@@ -122,7 +122,7 @@ function AboutPage() {
         <section className="space-y-2">
           <h2 className="text-sm font-semibold text-primary">Our vision</h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            Classrooms led by educators who leave work with peace of mind. Not because the job got
+            Schools led by educators who leave work with peace of mind. Not because the job got
             smaller, but because they stopped carrying it all in their heads. Stop trading your time
             for success — that is the goal behind everything we build.
           </p>
