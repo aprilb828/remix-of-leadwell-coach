@@ -129,7 +129,7 @@ function Index() {
 
           <div className="mt-6">
 
-            <TabsContent value="dashboard"><Dashboard /></TabsContent>
+            <TabsContent value="dashboard"><Dashboard onOpenLog={() => setActiveTab("log")} /></TabsContent>
             <TabsContent value="log"><VoiceCommand /></TabsContent>
             <TabsContent value="plan"><CoachingPlan /></TabsContent>
             <TabsContent value="instructional"><Instructional /></TabsContent>
