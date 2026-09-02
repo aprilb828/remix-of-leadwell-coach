@@ -84,7 +84,7 @@ export function Dashboard({ onOpenLog }: { onOpenLog: () => void }) {
           </p>
           <Button onClick={onOpenLog} className="gap-2">
             <Mic className="h-4 w-4" />
-            Open Teacher &amp; Team Log
+            Speak Quick Note
           </Button>
         </CardContent>
       </Card>
