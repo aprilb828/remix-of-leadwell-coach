@@ -241,6 +241,9 @@ export function VoiceCommand() {
           <CardTitle className="text-base">Speak a Command</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
+          <p className="text-center text-sm text-muted-foreground">
+            Tap the mic and speak naturally; your words are parsed into a structured log entry.
+          </p>
           <div className="flex flex-col items-center gap-3 py-4">
             {phase === "idle" && (
               <Button size="lg" className="h-20 w-20 rounded-full" onClick={handleStart} disabled={!supported}>

@@ -38,7 +38,7 @@ export function Dashboard({ onOpenLog }: { onOpenLog: () => void }) {
           <div className="flex-1 min-w-0">
             <h3 className="text-sm font-semibold">Speak Quick Note</h3>
             <p className="text-xs text-muted-foreground">
-              Capture a coaching moment by voice and pre-fill the Teacher &amp; Team Log.
+              Tap the mic and speak naturally; your words are parsed into a structured log entry.
             </p>
           </div>
           <Button size="sm" className="h-8 gap-1 text-xs shrink-0" onClick={onOpenLog}>
@@ -78,6 +78,9 @@ export function Dashboard({ onOpenLog }: { onOpenLog: () => void }) {
           <CardTitle className="text-base">Speak a Command</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
+          <p className="text-center text-sm text-muted-foreground">
+            Tap the mic and speak naturally; your words are parsed into a structured log entry.
+          </p>
           <div className="flex flex-col items-center gap-3 py-4">
             <Button size="lg" className="h-20 w-20 rounded-full" onClick={onOpenLog}>
               <Mic className="!h-8 !w-8" />
