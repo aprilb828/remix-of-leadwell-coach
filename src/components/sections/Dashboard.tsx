@@ -1,14 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Check, CalendarIcon, X } from "lucide-react";
-import { useState } from "react";
-import { NotesBlock } from "./NotesBlock";
+import { Check, CalendarIcon, X, Mic, BellRing } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Switch } from "@/components/ui/switch";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { CloudNotesBlock, CloudResetButton } from "@/components/CloudNotesBlock";
 import { useDailyReflection } from "@/hooks/use-daily-reflection";
 
-export function Dashboard() {
+export function Dashboard({ onOpenLog }: { onOpenLog: () => void }) {
   const morning = useDailyReflection("morning");
   const eod = useDailyReflection("eod");
   return (
@@ -57,17 +57,21 @@ export function Dashboard() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">📝 Coach Notes</CardTitle>
+          <CardTitle className="text-base">🎙️ Speak on Command</CardTitle>
         </CardHeader>
-        <CardContent>
-          <NotesBlock
-            storageKey="cw.coach.notes"
-            label="Quick notes you'll want later (conversations, decisions, commitments)"
-            placeholder="Keep it brief and factual…"
-            rows={5}
-          />
+        <CardContent className="space-y-3">
+          <p className="text-sm text-muted-foreground">
+            Capture conversations, decisions, and commitments by voice. Your words are parsed and
+            pre-filled into the Teacher &amp; Team Log.
+          </p>
+          <Button onClick={onOpenLog} className="gap-2">
+            <Mic className="h-4 w-4" />
+            Open Teacher &amp; Team Log
+          </Button>
         </CardContent>
       </Card>
+
+      <DailyReviewReminder onOpenLog={onOpenLog} />
 
       <HelpfulLinks />
 
@@ -252,6 +256,68 @@ function HelpfulLinks() {
             Save links
           </Button>
           {saved && <span className="text-sm text-emerald-600">✓ Links saved!</span>}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function todayKey() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function DailyReviewReminder({ onOpenLog }: { onOpenLog: () => void }) {
+  const [enabled, setEnabled] = useLocalStorage("cw.reminder.3pm.enabled", true);
+  const [followUp, setFollowUp] = useLocalStorage("cw.reminder.3pm.followup", false);
+  const [doneOn, setDoneOn] = useLocalStorage("cw.reminder.3pm.done", "");
+  const [due, setDue] = useState(false);
+
+  useEffect(() => {
+    if (!enabled) return;
+    const check = () => setDue(new Date().getHours() >= 15);
+    check();
+    const id = window.setInterval(check, 60_000);
+    return () => window.clearInterval(id);
+  }, [enabled]);
+
+  const active = enabled && due && doneOn !== todayKey();
+
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle className="text-base">⏰ 3:00 PM Daily Review</CardTitle>
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-muted-foreground">Reminder</span>
+          <Switch checked={enabled} onCheckedChange={setEnabled} aria-label="Toggle daily reminder" />
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        {active ? (
+          <div className="flex items-start gap-3 rounded-md border border-primary/30 bg-primary/5 p-3">
+            <BellRing className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+            <div className="flex-1 space-y-2">
+              <p className="text-sm font-medium">Time to review today's notes.</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <Button size="sm" variant="outline" onClick={onOpenLog}>Review log</Button>
+                <Button size="sm" onClick={() => setDoneOn(todayKey())}>Mark reviewed</Button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <p className="text-sm text-muted-foreground">
+            {enabled
+              ? doneOn === todayKey()
+                ? "Today's review is complete. ✓"
+                : "You'll be reminded at 3:00 PM to review today's notes."
+              : "Daily review reminder is off."}
+          </p>
+        )}
+        <div className="flex items-center justify-between rounded-md border p-3">
+          <div>
+            <p className="text-sm font-medium">Follow-up needed</p>
+            <p className="text-xs text-muted-foreground">Flag that today's review requires follow-up tomorrow.</p>
+          </div>
+          <Switch checked={followUp} onCheckedChange={setFollowUp} aria-label="Toggle follow-up needed" />
         </div>
       </CardContent>
     </Card>
