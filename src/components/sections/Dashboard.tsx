@@ -1,14 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Check, CalendarIcon, X } from "lucide-react";
-import { useState } from "react";
-import { NotesBlock } from "./NotesBlock";
+import { Check, CalendarIcon, X, Mic, BellRing } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Switch } from "@/components/ui/switch";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { CloudNotesBlock, CloudResetButton } from "@/components/CloudNotesBlock";
 import { useDailyReflection } from "@/hooks/use-daily-reflection";
 
-export function Dashboard() {
+export function Dashboard({ onOpenLog }: { onOpenLog: () => void }) {
   const morning = useDailyReflection("morning");
   const eod = useDailyReflection("eod");
   return (
