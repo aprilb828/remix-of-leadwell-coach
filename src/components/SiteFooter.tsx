@@ -19,14 +19,14 @@ export function SiteFooter() {
       </nav>
       <p className="mt-3 leading-relaxed">
         Companion Education-Coach Edition™ · The Companion Ed Framework™ · © 2026 Companion
-        Education™ · Created by April Stephens Bryson ·{" "}
-        <a href="mailto:support@companioneducation.com" className="underline underline-offset-2">
-          support@companioneducation.com
-        </a>
+        Education™ · Created by April Stephens Bryson
       </p>
       <p className="mt-2 max-w-xl mx-auto leading-relaxed">
         Companion Education™ can offer personalized support for app questions or provide upgraded
-        features upon request.
+        features upon request.{" "}
+        <a href="mailto:support@companioneducation.com" className="underline underline-offset-2">
+          support@companioneducation.com
+        </a>
       </p>
     </footer>
   );
