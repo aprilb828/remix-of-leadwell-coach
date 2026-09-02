@@ -13,10 +13,6 @@ export function SiteFooter() {
           About Companion Education™ &amp; our founder
         </Link>
         <span aria-hidden>·</span>
-        <Link to="/contact" className="underline underline-offset-2 hover:text-foreground">
-          Contact us
-        </Link>
-        <span aria-hidden>·</span>
         <Link to="/privacy" className="underline underline-offset-2 hover:text-foreground">
           Privacy Policy
         </Link>
@@ -24,9 +20,13 @@ export function SiteFooter() {
       <p className="mt-3 leading-relaxed">
         Companion Education-Coach Edition™ · The Companion Ed Framework™ · © 2026 Companion
         Education™ · Created by April Stephens Bryson ·{" "}
-        <a href="mailto:april@companioneducation.com" className="underline underline-offset-2">
-          april@companioneducation.com
+        <a href="mailto:support@companioneducation.com" className="underline underline-offset-2">
+          support@companioneducation.com
         </a>
+      </p>
+      <p className="mt-2 max-w-xl mx-auto leading-relaxed">
+        Companion Education™ can offer personalized support for app questions or provide upgraded
+        features upon request.
       </p>
     </footer>
   );
