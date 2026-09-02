@@ -75,17 +75,15 @@ export function Dashboard({ onOpenLog }: { onOpenLog: () => void }) {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">🎙️ Speak on Command</CardTitle>
+          <CardTitle className="text-base">Speak a Command</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
-          <p className="text-sm text-muted-foreground">
-            Capture conversations, decisions, and commitments by voice. Your words are parsed and
-            pre-filled into the Teacher &amp; Team Log.
-          </p>
-          <Button onClick={onOpenLog} className="gap-2">
-            <Mic className="h-4 w-4" />
-            Speak Quick Note
-          </Button>
+        <CardContent className="space-y-4">
+          <div className="flex flex-col items-center gap-3 py-4">
+            <Button size="lg" className="h-20 w-20 rounded-full" onClick={onOpenLog}>
+              <Mic className="!h-8 !w-8" />
+            </Button>
+            <p className="text-sm text-muted-foreground">Tap to record</p>
+          </div>
         </CardContent>
       </Card>
 
