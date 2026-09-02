@@ -31,6 +31,24 @@ export function Dashboard({ onOpenLog }: { onOpenLog: () => void }) {
       <CalendarCard />
 
       <Card>
+        <CardContent className="flex items-center gap-4 py-4">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+            <Mic className="h-5 w-5" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h3 className="text-sm font-semibold">Speak Quick Note</h3>
+            <p className="text-xs text-muted-foreground">
+              Capture a coaching moment by voice and pre-fill the Teacher &amp; Team Log.
+            </p>
+          </div>
+          <Button size="sm" className="h-8 gap-1 text-xs shrink-0" onClick={onOpenLog}>
+            <Mic className="h-3.5 w-3.5" />
+            Speak Quick Note
+          </Button>
+        </CardContent>
+      </Card>
+
+      <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-base">🌅 Morning Coach Check-In</CardTitle>
           <CloudResetButton onReset={morning.reset} />
@@ -66,7 +84,7 @@ export function Dashboard({ onOpenLog }: { onOpenLog: () => void }) {
           </p>
           <Button onClick={onOpenLog} className="gap-2">
             <Mic className="h-4 w-4" />
-            Open Teacher &amp; Team Log
+            Speak Quick Note
           </Button>
         </CardContent>
       </Card>
