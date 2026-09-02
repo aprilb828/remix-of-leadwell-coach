@@ -57,17 +57,21 @@ export function Dashboard() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">📝 Coach Notes</CardTitle>
+          <CardTitle className="text-base">🎙️ Speak on Command</CardTitle>
         </CardHeader>
-        <CardContent>
-          <NotesBlock
-            storageKey="cw.coach.notes"
-            label="Quick notes you'll want later (conversations, decisions, commitments)"
-            placeholder="Keep it brief and factual…"
-            rows={5}
-          />
+        <CardContent className="space-y-3">
+          <p className="text-sm text-muted-foreground">
+            Capture conversations, decisions, and commitments by voice. Your words are parsed and
+            pre-filled into the Teacher &amp; Team Log.
+          </p>
+          <Button onClick={onOpenLog} className="gap-2">
+            <Mic className="h-4 w-4" />
+            Open Teacher &amp; Team Log
+          </Button>
         </CardContent>
       </Card>
+
+      <DailyReviewReminder onOpenLog={onOpenLog} />
 
       <HelpfulLinks />
 
