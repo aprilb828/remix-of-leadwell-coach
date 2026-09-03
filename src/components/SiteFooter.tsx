@@ -5,10 +5,6 @@ export function SiteFooter() {
   return (
     <footer className="mt-12 border-t border-border pt-4 text-center text-xs text-muted-foreground">
       <nav className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-        <Link to="/" className="underline underline-offset-2 hover:text-foreground">
-          Instructional coaching companion
-        </Link>
-        <span aria-hidden>·</span>
         <Link to="/about" className="underline underline-offset-2 hover:text-foreground">
           About Companion Education™ &amp; our founder
         </Link>
@@ -22,8 +18,7 @@ export function SiteFooter() {
         reserved
       </p>
       <p className="mt-2 max-w-xl mx-auto leading-relaxed">
-        Companion Education™ can offer personalized support for app questions or provide upgraded
-        features upon request.{" "}
+        For personalized support or upgraded features email{" "}
         <a href="mailto:support@companioneducation.com" className="underline underline-offset-2">
           support@companioneducation.com
         </a>
