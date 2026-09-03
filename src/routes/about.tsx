@@ -153,25 +153,6 @@ function AboutPage() {
           </div>
         </section>
 
-        <Card>
-          <CardContent className="space-y-3 pt-6">
-            <h2 className="text-sm font-semibold text-primary">See how it works</h2>
-            <p className="text-xs leading-relaxed text-muted-foreground">
-              Companion Education-Coach Edition™ turns a spoken ten-second note into a tagged,
-              dated, searchable record — waiting for you at 3:00, already sorted into your
-              end-of-day summary.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <Button asChild size="sm">
-                <Link to="/">Open the app</Link>
-              </Button>
-              <Button asChild variant="secondary" size="sm">
-                <a href="mailto:support@companioneducation.com">Contact us</a>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
         <SiteFooter />
 
       </main>
