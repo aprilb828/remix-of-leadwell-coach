@@ -114,7 +114,7 @@ function AboutPage() {
           <p className="text-sm leading-relaxed text-muted-foreground">
             To give every educator a calm, practical system for the parts of the job that never fit
             on the lesson plan — the student moment worth remembering, the family who needs a call,
-            the promise made in a hallway. We believe teachers should not have to choose between
+            the promise made in a hallway. We believe you should not have to choose between
             doing the work and documenting it.
           </p>
         </section>
@@ -152,25 +152,6 @@ function AboutPage() {
             ))}
           </div>
         </section>
-
-        <Card>
-          <CardContent className="space-y-3 pt-6">
-            <h2 className="text-sm font-semibold text-primary">See how it works</h2>
-            <p className="text-xs leading-relaxed text-muted-foreground">
-              Companion Education-Coach Edition™ turns a spoken ten-second note into a tagged,
-              dated, searchable record — waiting for you at 3:00, already sorted into your
-              end-of-day summary.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <Button asChild size="sm">
-                <Link to="/">Open the app</Link>
-              </Button>
-              <Button asChild variant="secondary" size="sm">
-                <Link to="/contact">Contact us</Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
 
         <SiteFooter />
 
