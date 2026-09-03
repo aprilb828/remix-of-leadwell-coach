@@ -114,7 +114,7 @@ function AboutPage() {
           <p className="text-sm leading-relaxed text-muted-foreground">
             To give every educator a calm, practical system for the parts of the job that never fit
             on the lesson plan — the student moment worth remembering, the family who needs a call,
-            the promise made in a hallway. We believe teachers should not have to choose between
+            the promise made in a hallway. We believe you should not have to choose between
             doing the work and documenting it.
           </p>
         </section>
