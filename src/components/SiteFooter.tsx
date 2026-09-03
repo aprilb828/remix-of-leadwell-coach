@@ -18,8 +18,8 @@ export function SiteFooter() {
         </Link>
       </nav>
       <p className="mt-3 leading-relaxed">
-        Companion Education-Coach Edition™ · The Companion Ed Framework™ · © 2026 Companion
-        Education™
+        Companion Education-Coach Edition™ · The Companion Ed Framework™ · © 2026 all rights
+        reserved
       </p>
       <p className="mt-2 max-w-xl mx-auto leading-relaxed">
         Companion Education™ can offer personalized support for app questions or provide upgraded
