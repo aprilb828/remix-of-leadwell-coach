@@ -12,6 +12,10 @@ export function SiteFooter() {
         <Link to="/privacy" className="underline underline-offset-2 hover:text-foreground">
           Privacy Policy
         </Link>
+        <span aria-hidden>·</span>
+        <Link to="/terms" className="underline underline-offset-2 hover:text-foreground">
+          Terms &amp; Conditions
+        </Link>
       </nav>
       <p className="mt-3 leading-relaxed">
         Companion Education-Coach Edition™ · The Companion Ed Framework™ · © 2026 all rights
