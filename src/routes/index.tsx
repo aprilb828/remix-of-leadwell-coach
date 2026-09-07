@@ -11,7 +11,7 @@ import { Communication } from "@/components/sections/Communication";
 import { WeeklyReset } from "@/components/sections/WeeklyReset";
 import { History } from "@/components/sections/History";
 import { Goals } from "@/components/sections/Goals";
-import { Compass, Info } from "lucide-react";
+import { Compass } from "lucide-react";
 import { ExportData } from "@/components/ExportData";
 import { TourDialog, useTour } from "@/components/TourDialog";
 import { SiteFooter } from "@/components/SiteFooter";
