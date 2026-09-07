@@ -97,9 +97,9 @@ function Index() {
                 <Compass className="h-3 w-3" />
                 Tour
               </Button>
-              <Button asChild variant="secondary" size="sm" className="h-7 gap-1 rounded-full px-3 text-xs">
+              <Button asChild variant="secondary" size="sm" className="h-7 gap-1.5 rounded-full px-3 text-xs">
                 <Link to="/about">
-                  <Info className="h-3 w-3" />
+                  <img src={appleLogo} alt="" className="h-4 w-4 rounded-[4px]" />
                   Framework
                 </Link>
               </Button>
