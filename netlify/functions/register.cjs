@@ -13,7 +13,7 @@ exports.handler = async (event) => {
   try {
     const supabase = getClient();
 
-    let query = supabase.from("activations").select("code").eq("device_id", device);
+    let query = supabase.from("activations").select("*").eq("device_id", device);
     if (normalized) query = query.eq("code", normalized);
 
     const { data: rows, error } = await query;
@@ -24,19 +24,22 @@ exports.handler = async (event) => {
 
     const { data: valid, error: codeError } = await supabase
       .from("access_codes")
-      .select("code, max_activations, active")
-      .in("code", codes)
-      .eq("edition", EDITION);
+      .select("*")
+      .in("code", codes);
 
     if (codeError) throw codeError;
 
-    const match = (valid || []).find((c) => c.active !== false);
+    const match = (valid || []).find(
+      (c) =>
+        c.active !== false &&
+        (!("edition" in c) || !c.edition || String(c.edition).toLowerCase() === EDITION),
+    );
     if (!match) return json(200, { activated: false });
 
     return json(200, {
       activated: true,
       code: match.code,
-      maxActivations: match.max_activations || 3,
+      maxActivations: Number(match.max_activations) > 0 ? Number(match.max_activations) : 3,
     });
   } catch (error) {
     console.error("register error", error);
