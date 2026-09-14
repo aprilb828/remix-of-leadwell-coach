@@ -17,7 +17,7 @@ exports.handler = async (event) => {
 
     const { data: accessCode, error: codeError } = await supabase
       .from("access_codes")
-      .select("id, code, edition, max_activations, active")
+      .select("code, edition, max_activations, active")
       .eq("code", normalized)
       .eq("edition", EDITION)
       .maybeSingle();
