@@ -15,27 +15,31 @@ exports.handler = async (event) => {
   try {
     const supabase = getClient();
 
+    // Select * so we never reference a column that may not exist in the shared table.
     const { data: accessCode, error: codeError } = await supabase
       .from("access_codes")
-      .select("code, edition, max_activations, active")
+      .select("*")
       .eq("code", normalized)
-      .eq("edition", EDITION)
       .maybeSingle();
 
     if (codeError) throw codeError;
     if (!accessCode) {
+      return json(404, { success: false, message: "That access code was not found." });
+    }
+    // Only enforce edition / active when those columns actually exist on the row.
+    if ("edition" in accessCode && accessCode.edition && String(accessCode.edition).toLowerCase() !== EDITION) {
       return json(404, { success: false, message: "That access code was not found for the Coach Edition." });
     }
-    if (accessCode.active === false) {
+    if ("active" in accessCode && accessCode.active === false) {
       return json(403, { success: false, message: "That access code is no longer active." });
     }
 
-    const maxActivations = accessCode.max_activations || 3;
+    const maxActivations = Number(accessCode.max_activations) > 0 ? Number(accessCode.max_activations) : 3;
 
     // Already activated on this device?
     const { data: existing, error: existingError } = await supabase
       .from("activations")
-      .select("id")
+      .select("*")
       .eq("code", normalized)
       .eq("device_id", device)
       .maybeSingle();
@@ -47,7 +51,7 @@ exports.handler = async (event) => {
 
     const { count, error: countError } = await supabase
       .from("activations")
-      .select("id", { count: "exact", head: true })
+      .select("*", { count: "exact", head: true })
       .eq("code", normalized);
 
     if (countError) throw countError;
