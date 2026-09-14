@@ -1,0 +1,48 @@
+const { getClient, json, parseBody, headers, EDITION } = require("./_supabase.cjs");
+
+const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+function randomSuffix() {
+  let out = "";
+  for (let i = 0; i < 6; i += 1) {
+    out += ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
+  }
+  return out;
+}
+
+function newCode() {
+  return `CE-COAC-${randomSuffix()}`;
+}
+
+exports.handler = async (event) => {
+  if (event.httpMethod === "OPTIONS") return { statusCode: 204, headers, body: "" };
+  if (event.httpMethod !== "POST") return json(405, { success: false, message: "Method not allowed" });
+
+  const { maxActivations, email, note } = parseBody(event);
+  const limit = Number(maxActivations) > 0 ? Number(maxActivations) : 3;
+
+  try {
+    const supabase = getClient();
+
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      const code = newCode();
+
+      const row = { code, edition: EDITION, max_activations: limit, active: true };
+      if (email) row.email = email;
+      if (note) row.note = note;
+
+      const { error } = await supabase.from("access_codes").insert(row);
+
+      if (!error) {
+        return json(200, { success: true, code, edition: EDITION, maxActivations: limit });
+      }
+      // 23505 = unique violation; retry with a fresh code.
+      if (error.code !== "23505") throw error;
+    }
+
+    return json(500, { success: false, message: "Could not generate a unique code. Please try again." });
+  } catch (error) {
+    console.error("issue-code error", error);
+    return json(500, { success: false, message: "We couldn't issue a code right now. Please try again." });
+  }
+};
