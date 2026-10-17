@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getDeviceId } from "@/lib/device-id";
 import appleLogo from "@/assets/companion-apple.png";
+import { ActivationContext } from "@/premium/ActivationContext";
+import { normalizePlan, PLAN_STORAGE_KEY } from "@/premium/plan";
 
 const STORAGE_KEY = "companion-coach-access-code";
 const FN = "/.netlify/functions";
@@ -10,13 +12,14 @@ const FN = "/.netlify/functions";
 type Status = "checking" | "locked" | "unlocked";
 
 async function callFn(name: string, body: Record<string, unknown>) {
-  const res = await fetch(`${FN}/${name}`, {
+  try {
+    const res = await fetch(`${FN}/${name}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
+    signal: AbortSignal.timeout(10000),
   });
   const text = await res.text();
-  try {
     return { ok: res.ok, data: JSON.parse(text) as Record<string, unknown> };
   } catch {
     // Functions are not available on this host (e.g. local preview).
@@ -30,16 +33,28 @@ export function ActivationGate({ children }: { children: ReactNode }) {
   const [activeCode, setActiveCode] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [plan, setPlan] = useState<string | null>(null);
+
+  function savePlan(value: unknown) {
+    const next = normalizePlan(value);
+    if (next) window.localStorage.setItem(PLAN_STORAGE_KEY, next);
+    else window.localStorage.removeItem(PLAN_STORAGE_KEY);
+    setPlan(next);
+  }
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       const deviceId = getDeviceId();
       const saved = window.localStorage.getItem(STORAGE_KEY) ?? undefined;
-      const { data } = await callFn("register", { deviceId, code: saved });
+      setPlan(normalizePlan(window.localStorage.getItem(PLAN_STORAGE_KEY)));
+      const { ok, data } = navigator.onLine
+        ? await callFn("register", { deviceId, code: saved })
+        : { ok: false, data: null };
       if (cancelled) return;
-      if (!data) {
+      if (!ok || !data) {
         // No activation service reachable — do not lock the app out.
+        setActiveCode(saved ?? null);
         setStatus("unlocked");
         return;
       }
@@ -47,9 +62,11 @@ export function ActivationGate({ children }: { children: ReactNode }) {
         const c = String(data["code"] ?? saved ?? "");
         window.localStorage.setItem(STORAGE_KEY, c);
         setActiveCode(c);
+        savePlan(data["plan"]);
         setStatus("unlocked");
       } else {
         window.localStorage.removeItem(STORAGE_KEY);
+        savePlan(null);
         setStatus("locked");
       }
     })();
@@ -71,6 +88,7 @@ export function ActivationGate({ children }: { children: ReactNode }) {
     if (data["success"]) {
       window.localStorage.setItem(STORAGE_KEY, entered);
       setActiveCode(entered);
+      savePlan(data["plan"]);
       setStatus("unlocked");
     } else {
       setMessage(String(data["message"] ?? "That code could not be activated."));
@@ -84,6 +102,7 @@ export function ActivationGate({ children }: { children: ReactNode }) {
     const { data } = await callFn("deactivate", { code: current, deviceId: getDeviceId() });
     setBusy(false);
     window.localStorage.removeItem(STORAGE_KEY);
+    savePlan(null);
     setActiveCode(null);
     setCode("");
     setStatus("locked");
@@ -146,7 +165,7 @@ export function ActivationGate({ children }: { children: ReactNode }) {
   }
 
   return (
-    <>
+    <ActivationContext.Provider value={{ plan }}>
       {children}
       {activeCode && (
         <div className="mx-auto max-w-5xl px-4 pb-6 text-center text-[11px] text-muted-foreground">
@@ -156,6 +175,6 @@ export function ActivationGate({ children }: { children: ReactNode }) {
           </button>
         </div>
       )}
-    </>
+    </ActivationContext.Provider>
   );
 }

@@ -142,7 +142,7 @@ export const TOUR_SLIDES: Slide[] = [
           You do not have to solve everything today. Let's get started…
         </p>
         <p className="text-xs text-muted-foreground">
-          — April Stephens Bryson, Retired Elementary Principal · april@companioneducation.com
+          — April Stephens Bryson, Retired Elementary Principal · support@companioneducation.com
         </p>
       </div>
     ),
