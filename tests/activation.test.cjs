@@ -1,7 +1,7 @@
 const { test } = require("node:test");
 const assert = require("node:assert/strict");
 
-const helperPath = require.resolve("./_supabase.cjs");
+const helperPath = require.resolve("../netlify/functions/_supabase.cjs");
 let accessCode;
 let existing;
 let count;
@@ -33,8 +33,8 @@ require.cache[helperPath] = {
     }),
   },
 };
-const activate = require("./activate.cjs").handler;
-const register = require("./register.cjs").handler;
+const activate = require("../netlify/functions/activate.cjs").handler;
+const register = require("../netlify/functions/register.cjs").handler;
 const event = { httpMethod: "POST", body: JSON.stringify({ code: "CE-COAC-ABC123", deviceId: "this-device" }) };
 function reset(plan) {
   accessCode = { code: "CE-COAC-ABC123", edition: "coach", max_activations: 3, plan };
