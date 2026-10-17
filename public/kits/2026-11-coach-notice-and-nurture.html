@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>November Kit, Coach Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,0..100&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1B2A44; --ink-2:#46536B; --ink-3:#6B7689;
+  --line:#DDDCE4; --surface:#FFFFFF;
+  --paper:#F5F5F7; --accent:#12706E; --accent-deep:#0B4E4D; --soft:#DCEDEB;
+  --ochre:#C08A22; --ochre-soft:#F6EAD0; --cranberry:#8E2C48;
+  --serif:"Fraunces", Georgia, serif; --sans:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+@media (max-width:600px){.wrap{padding:0 16px}}
+
+/* Hero */
+.hero{padding:40px 0 32px;background:
+  radial-gradient(1200px 400px at 85% -10%, var(--soft), transparent 70%), var(--paper)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:48px;align-items:start}
+@media (max-width:920px){.hero-grid{grid-template-columns:1fr;gap:28px}}
+.edition{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 22px;color:var(--ink-2);font-weight:500;font-size:15px}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:#fff;border-radius:999px;padding:4px 12px 4px 9px;font-size:13px;font-weight:600;letter-spacing:.01em}
+.badge svg{width:14px;height:14px}
+h1{font-family:var(--serif);font-variation-settings:"SOFT" 100,"opsz" 144;font-weight:560;font-size:clamp(46px,7vw,84px);line-height:.96;letter-spacing:-.02em;margin:0 0 6px;color:var(--ink)}
+.month{font-family:var(--serif);font-variation-settings:"SOFT" 100;font-style:italic;font-size:22px;color:var(--accent-deep);margin:0 0 18px}
+.intro{max-width:56ch;color:var(--ink-2);font-size:17px;margin:0 0 26px}
+.me{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px}
+.me h2{font-size:15px;font-weight:600;margin:0 0 4px}
+.me p{margin:0 0 12px;color:var(--ink-3);font-size:14px}
+.me-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:600px){.me-fields{grid-template-columns:1fr}}
+.field label{display:block;font-size:13px;color:var(--ink-2);margin-bottom:4px;font-weight:500}
+.field input{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--paper)}
+.field input:focus{background:#fff}
+.progress{display:flex;align-items:center;gap:14px;margin-top:20px}
+.ring{width:58px;height:58px;flex:none}
+.ring circle{fill:none;stroke-width:6}
+.ring .bg{stroke:var(--line)} .ring .fg{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .5s ease}
+.progress strong{display:block;font-size:16px}
+.progress span{color:var(--ink-3);font-size:14px}
+
+/* Calendar (signature element) */
+.cal{background:var(--surface);border-radius:22px;border:1px solid var(--line);padding:22px;box-shadow:0 1px 0 rgba(27,42,68,.04),0 18px 40px -24px rgba(27,42,68,.35)}
+.cal-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;gap:12px;flex-wrap:wrap}
+.cal-head h2{font-family:var(--serif);font-variation-settings:"SOFT" 100;font-weight:560;font-size:26px;margin:0}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dow,.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.dow div{font-size:12px;color:var(--ink-3);text-align:center;padding-bottom:4px;font-weight:600}
+.day{position:relative;aspect-ratio:1/1;min-height:44px;border:1px solid transparent;border-radius:12px;background:var(--paper);cursor:pointer;padding:6px 7px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;transition:background .15s,border-color .15s}
+.day:hover{border-color:var(--line);background:#fff}
+.day.weekend{background:transparent}
+.day.sel{background:var(--ink);color:#fff}
+.day.today .num::after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--cranberry);margin-left:4px;vertical-align:middle}
+.day .num{font-weight:600;font-size:15px;line-height:1}
+.day.blank{background:none;cursor:default}
+.leaves{display:flex;gap:2px;align-items:flex-end;flex-wrap:wrap}
+.leaf{width:15px;height:15px}
+@media (max-width:600px){.cal{padding:14px;border-radius:18px}.day{padding:4px 5px;border-radius:9px}.leaf{width:11px;height:11px}.day .num{font-size:13px}.dow,.days{gap:4px}}
+.dayview{margin-top:16px;border-top:1px solid var(--line);padding-top:16px}
+.dayview h3{font-family:var(--serif);font-variation-settings:"SOFT" 100;font-weight:560;font-size:21px;margin:0 0 8px}
+.events{list-style:none;padding:0;margin:0 0 12px}
+.events li{display:flex;gap:9px;align-items:flex-start;padding:4px 0;font-size:15px}
+.events svg{flex:none;margin-top:3px;width:16px;height:16px}
+.empty{color:var(--ink-3);font-size:15px;margin:0 0 12px}
+
+/* Voice textarea */
+.voicebox{position:relative}
+.voicebox textarea{width:100%;min-height:84px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:11px 52px 11px 13px;background:var(--paper);line-height:1.5}
+.voicebox textarea:focus{background:#fff}
+.mic{position:absolute;right:8px;top:8px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer}
+.mic svg{width:18px;height:18px}
+.mic.on{background:var(--cranberry);border-color:var(--cranberry);color:#fff;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(142,44,72,.35)}50%{box-shadow:0 0 0 8px rgba(142,44,72,0)}}
+.saved{font-size:13px;color:var(--ink-3);margin-top:6px;min-height:18px}
+
+/* Tabs */
+.tabs{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.tablist{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:10px 0}
+.tablist::-webkit-scrollbar{display:none}
+.tab{flex:none;border:0;background:none;padding:9px 16px;border-radius:999px;cursor:pointer;font-weight:600;color:var(--ink-2);font-size:15px}
+.tab:hover{background:var(--soft)}
+.tab[aria-selected="true"]{background:var(--ink);color:#fff}
+main{padding:36px 0 64px}
+.panel[hidden]{display:none}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.panel-head h2{font-family:var(--serif);font-variation-settings:"SOFT" 100,"opsz" 72;font-weight:560;font-size:34px;line-height:1.1;margin:0}
+.panel-head p{margin:6px 0 0;color:var(--ink-2);max-width:60ch}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 16px;font-weight:600;font-size:14px;cursor:pointer;color:var(--ink);text-decoration:none}
+.btn:hover{border-color:var(--ink-3)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-deep)}
+.btn svg{width:16px;height:16px}
+
+/* Checklists */
+.lists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+@media (max-width:820px){.lists{grid-template-columns:1fr}}
+.list{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 22px 16px}
+.list h3{font-size:19px;margin:0;font-weight:700}
+.list .when{color:var(--ink-3);font-size:14px;margin:2px 0 12px}
+.bar{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:6px}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s ease}
+.count{font-size:13px;color:var(--ink-3);margin-bottom:10px}
+.item{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px solid #EEEDF2;cursor:pointer}
+.item input{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;border:2px solid var(--ink-3);border-radius:7px;margin:1px 0 0;cursor:pointer;display:grid;place-items:center;background:#fff}
+.item input:checked{background:var(--accent);border-color:var(--accent)}
+.item input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.item span{flex:1}
+.item input:checked + span{color:var(--ink-3);text-decoration:line-through;text-decoration-color:rgba(27,42,68,.3)}
+.item .del{border:0;background:none;color:var(--ink-3);cursor:pointer;font-size:18px;line-height:1;padding:0 4px}
+.add{display:flex;gap:8px;margin-top:10px}
+.add input{flex:1;min-width:0;border:1px dashed var(--line);border-radius:10px;padding:8px 11px;background:var(--paper)}
+
+/* Templates */
+.tpl{display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:820px){.tpl{grid-template-columns:1fr}}
+.tpl-list{display:flex;flex-direction:column;gap:6px}
+@media (max-width:820px){.tpl-list{flex-direction:row;overflow-x:auto;padding-bottom:6px}}
+.tpl-pick{text-align:left;border:1px solid transparent;background:none;border-radius:14px;padding:12px 14px;cursor:pointer}
+@media (max-width:820px){.tpl-pick{flex:none;width:210px;background:#fff;border-color:var(--line)}}
+.tpl-pick:hover{background:#fff;border-color:var(--line)}
+.tpl-pick[aria-pressed="true"]{background:var(--surface);border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+.tpl-pick strong{display:block;font-size:15px}
+.tpl-pick small{color:var(--ink-3);font-size:13px}
+.letter{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.letter-top{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.letter-top label{font-size:13px;color:var(--ink-3);font-weight:600}
+.letter-top input{flex:1;min-width:200px;border:0;font-weight:600;font-size:16px;padding:4px 0;background:none}
+.letter-body{padding:22px;min-height:300px;white-space:pre-wrap;font-size:16px;line-height:1.65;outline:none}
+.letter-body:focus{background:#FCFCFD}
+.letter-body mark{background:var(--ochre-soft);color:var(--ink);border-radius:4px;padding:0 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.letter-actions{display:flex;gap:8px;flex-wrap:wrap;padding:14px 22px;border-top:1px solid var(--line);background:var(--paper)}
+.hint{font-size:14px;color:var(--ink-3);margin:10px 2px 0}
+.hint mark{background:var(--ochre-soft);border-radius:4px;padding:0 3px}
+
+/* Reflect */
+.journal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+@media (max-width:820px){.journal{grid-template-columns:1fr}}
+.prompt{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+.prompt h3{font-family:var(--serif);font-variation-settings:"SOFT" 100,"opsz" 36;font-weight:500;font-size:21px;line-height:1.3;margin:0 0 6px}
+.prompt p{color:var(--ink-3);margin:0 0 12px;font-size:15px}
+.prompt textarea{min-height:120px;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 23px,#ECEBF1 23px,#ECEBF1 24px);background-attachment:local;line-height:24px;padding-top:11px}
+
+/* Weeks (a real sequence) */
+.weeks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:wk}
+@media (max-width:980px){.weeks{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.weeks{grid-template-columns:1fr}}
+.week{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.week.now{border-color:var(--accent);box-shadow:0 0 0 3px var(--soft)}
+.week .range{font-size:13px;font-weight:600;color:var(--accent-deep)}
+.week h3{font-family:var(--serif);font-variation-settings:"SOFT" 100;font-weight:560;font-size:21px;line-height:1.15;margin:0}
+.week p{margin:0;font-size:15px;color:var(--ink-2)}
+.win{margin-top:auto;background:var(--ochre-soft);border-radius:12px;padding:10px 12px;font-size:14px}
+.win b{display:block;font-size:13px;color:#7A5410;margin-bottom:2px}
+.nowtag{align-self:flex-start;background:var(--accent);color:#fff;font-size:12px;font-weight:600;border-radius:999px;padding:2px 10px}
+.tipbox{margin-top:26px;background:var(--ink);color:#fff;border-radius:20px;padding:26px 28px;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.tipbox p{flex:1;min-width:240px;margin:0;font-family:var(--serif);font-variation-settings:"SOFT" 100;font-size:22px;line-height:1.35}
+.tipbox .btn{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+.tipbox .btn:hover{border-color:#fff}
+
+footer{border-top:1px solid var(--line);padding:22px 0 34px;color:var(--ink-3);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:all .25s ease;z-index:50}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.reveal{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.reveal.d2{animation-delay:.12s}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+@media print{
+  body{background:#fff}
+  .tabs,.mic,.btn,.add,.letter-actions,.tipbox,.toast,.item .del,.tpl-list{display:none!important}
+  .panel[hidden]{display:block!important}
+  .panel{break-before:page}
+  .hero{background:#fff}
+  .cal,.list,.letter,.prompt,.week{box-shadow:none;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="leaf" viewBox="0 0 24 24"><path d="M20.5 3.5C11 3.2 4.6 7.7 4 15.2c-.1 1.3.1 2.6.5 3.8L2.8 20.7l1.1 1.1 1.7-1.7c1.2.4 2.5.6 3.8.5 7.5-.6 12-7 11.7-16.5-.1-.4-.3-.6-.6-.6zM8.3 17.4l-1.1-1.1c3-3.3 6.3-6.1 9.6-8.2-2.7 2.8-5.6 5.8-8.5 9.3z"/></symbol>
+    <symbol id="mic" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zM5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+    <symbol id="spark" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l2.2 6.3L20.5 10l-6.3 2.2L12 18.5l-2.2-6.3L3.5 10l6.3-1.7z"/></symbol>
+  </defs>
+</svg>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <p class="edition"><span class="badge"><svg><use href="#spark"/></svg>Premium</span><span id="edition"></span></p>
+      <h1 id="kitName"></h1>
+      <p class="month">November 2026</p>
+      <p class="intro" id="intro"></p>
+      <section class="me" aria-labelledby="meTitle">
+        <h2 id="meTitle">Make it yours</h2>
+        <p>Your details fill in every template in this kit automatically.</p>
+        <div class="me-fields">
+          <div class="field"><label for="meName">Your name</label><input id="meName" autocomplete="name" placeholder="Ms. Rivera"></div>
+          <div class="field"><label for="meSchool">School</label><input id="meSchool" placeholder="Smoky Mountain Middle"></div>
+          <div class="field"><label for="meExtra" id="meExtraLabel"></label><input id="meExtra"></div>
+        </div>
+      </section>
+      <div class="progress" aria-live="polite">
+        <svg class="ring" viewBox="0 0 64 64" aria-hidden="true"><circle class="bg" cx="32" cy="32" r="27"/><circle class="fg" id="ringFg" cx="32" cy="32" r="27" transform="rotate(-90 32 32)" stroke-dasharray="169.6" stroke-dashoffset="169.6"/></svg>
+        <div><strong id="progText">0 of 0 steps done</strong><span>Across every checklist in your kit</span></div>
+      </div>
+    </div>
+
+    <section class="cal reveal d2" aria-labelledby="calTitle">
+      <div class="cal-head">
+        <h2 id="calTitle">Your month at a glance</h2>
+        <div class="legend">
+          <span><svg class="leaf" style="color:var(--ochre)"><use href="#leaf" fill="currentColor"/></svg>Key date</span>
+          <span><svg class="leaf" style="color:var(--accent)"><use href="#leaf" fill="currentColor"/></svg>Suggested move</span>
+          <span><svg class="leaf" style="color:var(--ink)"><use href="#leaf" fill="currentColor"/></svg>Your note</span>
+        </div>
+      </div>
+      <div class="dow" aria-hidden="true"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div>
+      <div class="days" id="days" role="grid" aria-label="November 2026"></div>
+      <div class="dayview" id="dayview" aria-live="polite">
+        <h3 id="dayTitle"></h3>
+        <ul class="events" id="dayEvents"></ul>
+        <div class="voicebox">
+          <label for="dayNote" class="field" style="display:block;font-size:13px;color:var(--ink-2);font-weight:500;margin-bottom:4px">Notes for this day</label>
+          <textarea id="dayNote" placeholder="Type or tap the mic to speak a note"></textarea>
+        </div>
+        <div class="saved" id="daySaved"></div>
+      </div>
+    </section>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Kit sections">
+  <div class="wrap tablist" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="p-check" id="t-check">Checklists</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-tpl" id="t-tpl">Templates</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-ref" id="t-ref">Reflect</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-tips" id="t-tips">Weekly tips</button>
+  </div>
+</nav>
+
+<main class="wrap">
+  <section class="panel" id="p-check" role="tabpanel" aria-labelledby="t-check">
+    <div class="panel-head">
+      <div><h2>Planners and checklists</h2><p>Check things off as you go, and add your own steps. Your progress saves on this device.</p></div>
+      <button class="btn" id="printBtn"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 9V3h12v6M6 18H4v-7h16v7h-2M8 14h8v7H8z"/></svg>Print kit</button>
+    </div>
+    <div class="lists" id="lists"></div>
+  </section>
+
+  <section class="panel" id="p-tpl" role="tabpanel" aria-labelledby="t-tpl" hidden>
+    <div class="panel-head">
+      <div><h2>Communication templates</h2><p>Pick a template, fill in the highlighted spots, and copy it into your email. Edits save automatically.</p></div>
+    </div>
+    <div class="tpl">
+      <div class="tpl-list" id="tplList" aria-label="Templates"></div>
+      <div>
+        <div class="letter">
+          <div class="letter-top"><label for="tplSubject">Subject</label><input id="tplSubject"></div>
+          <div class="letter-body" id="tplBody" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Message"></div>
+          <div class="letter-actions">
+            <button class="btn primary" id="tplCopy"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M9 9h11v11H9zM5 15H4V4h11v1"/></svg>Copy message</button>
+            <a class="btn" id="tplMail" href="#"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 5h18v14H3zM3 6l9 7 9-7"/></svg>Open in email</a>
+            <button class="btn" id="tplReset">Reset template</button>
+          </div>
+        </div>
+        <p class="hint"><mark>Highlighted text</mark> is yours to fill in. Click into the message to type over it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-ref" role="tabpanel" aria-labelledby="t-ref" hidden>
+    <div class="panel-head">
+      <div><h2>Reflect</h2><p>A few minutes of honest reflection, typed or spoken. Tap the mic to talk it through.</p></div>
+      <button class="btn" id="dlBtn"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 3v12m-5-5 5 5 5-5M4 20h16"/></svg>Download my reflections</button>
+    </div>
+    <div class="journal" id="journal"></div>
+  </section>
+
+  <section class="panel" id="p-tips" role="tabpanel" aria-labelledby="t-tips" hidden>
+    <div class="panel-head">
+      <div><h2>Week by week</h2><p>One idea to lean on and one quick win for every week of November.</p></div>
+    </div>
+    <div class="weeks" id="weeks"></div>
+    <div class="tipbox">
+      <p id="quickTip"></p>
+      <button class="btn" id="tipNext">Another tip</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Companion Education Company. <span id="footEd"></span> Premium, November 2026.</span>
+    <span>Everything you type here is saved on this device only.</span>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+// Shared November 2026 dates for every edition
+const COMMON_DATES = [
+  { d: 1,  label: "Daylight saving time ends. Clocks fall back an hour.", kind: "obs" },
+  { d: 3,  label: "Election Day. Some schools close; check your district calendar.", kind: "obs" },
+  { d: 11, label: "Veterans Day", kind: "obs" },
+  { d: 13, label: "World Kindness Day", kind: "obs" },
+  { d: 16, label: "American Education Week begins (Kickoff Day)", kind: "obs" },
+  { d: 17, label: "American Education Week: Family Day", kind: "obs" },
+  { d: 18, label: "Education Support Professionals Day", kind: "obs" },
+  { d: 19, label: "American Education Week: Educator for a Day", kind: "obs" },
+  { d: 20, label: "Substitute Educators Day", kind: "obs" },
+  { d: 26, label: "Thanksgiving", kind: "obs" },
+  { d: 27, label: "Native American Heritage Day", kind: "obs" }
+];
+
+const KIT = {
+  key: "ce-kit-2026-11-coach",
+  edition: "Companion Ed-Coach Edition",
+  kitName: "Notice & Nurture",
+  tagline: "Your November kit",
+  intro: "By November, new teachers have lost the early-year glow and veterans are pacing themselves. It's the month when good coaching matters most and is easiest to postpone. This kit helps you protect your cycles, use first-quarter data without it feeling like judgment, and remind the teachers you support what they're doing well.",
+  extraLabel: "Your title",
+  extraPlaceholder: "Instructional Coach",
+  theme: { accent: "#2B7A86", accentDeep: "#1C5660", soft: "#DDEEEF", paper: "#F2F6F7" },
+  moves: [
+    { d: 2,  label: "Map your caseload: every teacher, goal, last contact" },
+    { d: 5,  label: "Offer conference prep sessions to new teachers" },
+    { d: 9,  label: "Begin first-quarter data conversations" },
+    { d: 13, label: "Send one teacher a celebration note" },
+    { d: 16, label: "Mid-cycle reviews this week" },
+    { d: 18, label: "Thank a paraprofessional you plan with" },
+    { d: 24, label: "Close out one cycle before break" },
+    { d: 30, label: "Visits only today: save new goals for Wednesday" }
+  ],
+  checklists: [
+    { id: "cycle", title: "Mid-cycle coaching check", when: "Week of Nov 2", items: [
+      "List every teacher you're supporting and where each cycle stands",
+      "Revisit each goal: is it still the right goal, and is it still measurable?",
+      "Gather one piece of student evidence for each cycle",
+      "Schedule follow-up conversations before break, not after",
+      "Note one specific strength to name in each conversation",
+      "Decide which cycles close in November and which carry into December"
+    ]},
+    { id: "data", title: "First-quarter data conversation prep", when: "Weeks of Nov 9 and Nov 16", items: [
+      "Pull the data with the teacher, not for the teacher",
+      "Open with a question: \"What do you notice?\"",
+      "Put student work on the table next to the numbers",
+      "Agree on one focus, not five",
+      "Co-plan a next step the teacher can try this week",
+      "Schedule the follow-up before the meeting ends"
+    ]},
+    { id: "new", title: "New teacher November support", when: "All month", items: [
+      "Have a non-evaluative \"How are you, really?\" conversation with each new teacher",
+      "Offer conference prep: talking points, work samples, a practice run",
+      "Share one time-saving system they can borrow this week",
+      "Pair them with a veteran colleague for lunch or a classroom visit",
+      "Watch for signs of burnout, and with the teacher's permission, loop in your principal",
+      "Celebrate one win out loud"
+    ]},
+    { id: "wrap", title: "Pre-break wrap-up", when: "Week of Nov 23", items: [
+      "Update your coaching notes for every teacher",
+      "Send a short gratitude note to each teacher you coach",
+      "Draft December's cycle calendar",
+      "Clear your own desk and inbox before you leave"
+    ]}
+  ],
+  templates: [
+    { id: "followup", title: "Coaching cycle follow-up", audience: "One teacher", subject: "Following up on our conversation",
+      body: "Hi [Teacher],\n\nThanks for the time today. I left our conversation thinking about [a specific insight they shared].\n\nWhat we agreed on:\n• Your focus: [goal]\n• What you'll try: [strategy]\n• What I'll do: [support, such as modeling, co-planning, or finding a resource]\n• When we'll reconnect: [date]\n\nYou're closer than you think. See you [day].\n\n{{name}}\n{{extra}}" },
+    { id: "celebrate", title: "Post-visit celebration note", audience: "One teacher", subject: "Something I noticed",
+      body: "[Teacher],\n\nI wanted to send this while it was fresh. When I visited during [lesson or time], I noticed [a specific, observable moment]. Your students [what students did as a result].\n\nThat's the kind of teaching we're aiming for, and you did it. Thank you for letting me be in the room.\n\n{{name}}" },
+    { id: "plc", title: "Team data meeting invitation", audience: "A team or PLC", subject: "Let's look at first-quarter data together",
+      body: "Hi team,\n\nI'd love for us to sit down together and look at first-quarter results before break. This isn't an evaluation. It's a chance to notice patterns and plan our next move as a team.\n\nWhen: [date and time]\nWhere: [location]\nBring: [one set of student work from a recent assessment]\n\nWe'll leave with one shared focus for December.\n\n{{name}}\n{{extra}}, {{school}}" },
+    { id: "thanks", title: "Pre-break gratitude note", audience: "One teacher", subject: "Thank you for this fall",
+      body: "[Teacher],\n\nBefore break, I wanted to tell you something I'm grateful for: working with you this fall. [A specific moment of growth.] You took risks in front of students and kept going when it was hard.\n\nRest well. You've earned it.\n\n{{name}}" },
+    { id: "principal", title: "Coaching update for your principal", audience: "Principal", subject: "Coaching update: November",
+      body: "Hi [Principal],\n\nHere's a quick update on coaching at {{school}}.\n\nActive cycles: [number]\nBright spots: [one or two, shared with the teacher's permission]\nPatterns I'm seeing: [a trend across classrooms]\nSupport that would help: [a specific request]\n\nAs always, individual coaching conversations stay confidential. I'm glad to talk through any of this.\n\n{{name}}" }
+  ],
+  reflections: [
+    { id: "r1", prompt: "Which teacher grew the most this fall?", nudge: "Have you told them, specifically, what you saw?" },
+    { id: "r2", prompt: "Where did you give an answer when a question would have served better?", nudge: "What question could you have asked instead?" },
+    { id: "r3", prompt: "Which cycle have you let slide?", nudge: "What's the smallest next step to restart it?" },
+    { id: "r4", prompt: "What are teachers telling you about their workload?", nudge: "Who needs to hear it, and how will you share it without breaking confidence?" },
+    { id: "r5", prompt: "What's your own growth goal as a coach this year?", nudge: "Where are you on it, honestly?" },
+    { id: "r6", prompt: "What filled your cup this month?", nudge: "How can you protect more of it in December?" }
+  ],
+  weeks: [
+    { start: "2026-11-02", end: "2026-11-06", range: "Nov 2–6", title: "Map your caseload",
+      tip: "Make a one-page map: every teacher, their goal, your last contact. The gaps jump out.",
+      win: "Send a one-line \"How's it going?\" to anyone you haven't seen in two weeks." },
+    { start: "2026-11-09", end: "2026-11-13", range: "Nov 9–13", title: "Data with care",
+      tip: "Put student work on the table before the spreadsheet. Teachers engage with kids, not columns.",
+      win: "Offer a 15-minute conference prep session to every new teacher." },
+    { start: "2026-11-16", end: "2026-11-20", range: "Nov 16–20", title: "Celebrate growth",
+      tip: "During American Education Week, celebrate effort and growth publicly (with permission) and keep struggles private.",
+      win: "Write two celebration notes: one to a teacher, one to a paraprofessional." },
+    { start: "2026-11-23", end: "2026-11-25", range: "Nov 23–25", title: "Close the loop",
+      tip: "Don't start a new cycle in a short week. Close one, celebrate it, and set the next start date.",
+      win: "Update your coaching notes before you leave Tuesday." },
+    { start: "2026-11-30", end: "2026-12-04", range: "Nov 30", title: "Restart with intention",
+      tip: "Re-entry week is for relationships. Visit, listen, and save new goals for midweek.",
+      win: "Stop by three classrooms just to say welcome back." }
+  ],
+  quickTips: [
+    "Bring one question to every visit and leave your opinions at the door until asked.",
+    "Dictate notes in the hallway right after a visit, while the details are sharp.",
+    "Model a strategy in the teacher's own room with their own students. It sticks.",
+    "Keep every conversation to one focus. Two goals means zero goals.",
+    "Ask, \"What would make this easier?\" before offering any resource.",
+    "Block your coaching time on the calendar before meetings can claim it.",
+    "Celebrate in public and coach in private.",
+    "End every conversation with a date for the next one."
+  ]
+};
+
+</script>
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var root = document.documentElement.style;
+  root.setProperty("--accent", KIT.theme.accent);
+  root.setProperty("--accent-deep", KIT.theme.accentDeep);
+  root.setProperty("--soft", KIT.theme.soft);
+  root.setProperty("--paper", KIT.theme.paper);
+
+  // ---------- storage ----------
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KIT.key)) || {}; } catch(e) { state = {}; }
+  ["checks","custom","notes","refl","me","tpl"].forEach(function(k){ if(!state[k] || typeof state[k] !== "object") state[k] = {}; });
+  var saveTimer;
+  function save(){ clearTimeout(saveTimer); saveTimer = setTimeout(function(){ try { localStorage.setItem(KIT.key, JSON.stringify(state)); } catch(e){} }, 250); }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function toast(msg){ var t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(function(){ t.classList.remove("show"); },1800); }
+
+  // ---------- header ----------
+  $("edition").textContent = KIT.edition;
+  $("footEd").textContent = KIT.edition;
+  $("kitName").textContent = KIT.kitName;
+  $("intro").textContent = KIT.intro;
+  $("meExtraLabel").textContent = KIT.extraLabel;
+  $("meExtra").placeholder = KIT.extraPlaceholder;
+  [["meName","name"],["meSchool","school"],["meExtra","extra"]].forEach(function(p){
+    var el=$(p[0]); el.value = state.me[p[1]] || "";
+    el.addEventListener("input", function(){ state.me[p[1]] = el.value.trim(); save(); renderTemplate(false); });
+  });
+
+  // ---------- voice ----------
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var active = null;
+  function attachMic(textarea, onChange){
+    if(!SR) return;
+    var btn = document.createElement("button");
+    btn.type="button"; btn.className="mic"; btn.setAttribute("aria-label","Speak instead of typing");
+    btn.innerHTML='<svg><use href="#mic"/></svg>';
+    textarea.parentNode.appendChild(btn);
+    btn.addEventListener("click", function(){
+      if(active && active.btn === btn){ active.rec.stop(); return; }
+      if(active){ active.rec.stop(); }
+      var rec = new SR(); rec.lang = "en-US"; rec.continuous = true; rec.interimResults = true;
+      var base = textarea.value ? textarea.value.replace(/\s*$/," ") : "";
+      rec.onresult = function(ev){
+        var fin="", interim="";
+        for(var i=0;i<ev.results.length;i++){ var r=ev.results[i]; if(r.isFinal) fin += r[0].transcript; else interim += r[0].transcript; }
+        textarea.value = base + fin + interim; onChange();
+      };
+      rec.onend = function(){ btn.classList.remove("on"); btn.setAttribute("aria-label","Speak instead of typing"); if(active && active.btn===btn) active=null; };
+      rec.onerror = function(e){ if(e.error==="not-allowed") toast("Allow microphone access to use voice"); };
+      try { rec.start(); active = {rec:rec, btn:btn}; btn.classList.add("on"); btn.setAttribute("aria-label","Stop listening"); } catch(e){}
+    });
+  }
+
+  // ---------- calendar ----------
+  var events = {};
+  function addEv(d,label,kind){ (events[d] = events[d] || []).push({label:label,kind:kind}); }
+  COMMON_DATES.forEach(function(e){ addEv(e.d, e.label, "obs"); });
+  KIT.moves.forEach(function(e){ addEv(e.d, e.label, "move"); });
+  var now = new Date();
+  var isNov = now.getFullYear()===2026 && now.getMonth()===10;
+  var selected = isNov ? now.getDate() : KIT.moves[0].d;
+  var colors = {obs:"var(--ochre)", move:"var(--accent)", note:"var(--ink)"};
+  function leafSvg(kind){ return '<svg class="leaf" style="color:'+colors[kind]+'" aria-hidden="true"><use href="#leaf" fill="currentColor"/></svg>'; }
+  function renderDays(){
+    var html="", first = new Date(2026,10,1).getDay();
+    for(var b=0;b<first;b++) html += '<div class="day blank" aria-hidden="true"></div>';
+    for(var d=1; d<=30; d++){
+      var dow = (first + d - 1) % 7, evs = events[d] || [], kinds = [];
+      if(evs.some(function(e){return e.kind==="obs";})) kinds.push("obs");
+      if(evs.some(function(e){return e.kind==="move";})) kinds.push("move");
+      if(state.notes[d]) kinds.push("note");
+      var cls = "day" + (dow===0||dow===6?" weekend":"") + (d===selected?" sel":"") + (isNov && d===now.getDate()?" today":"");
+      var label = "November " + d + (evs.length ? ", " + evs.map(function(e){return e.label;}).join("; ") : "") + (state.notes[d] ? ", has your note" : "");
+      html += '<button class="'+cls+'" data-d="'+d+'" aria-label="'+esc(label)+'" aria-pressed="'+(d===selected)+'"><span class="num">'+d+'</span><span class="leaves">'+kinds.map(leafSvg).join("")+'</span></button>';
+    }
+    $("days").innerHTML = html;
+  }
+  function renderDay(){
+    var dt = new Date(2026,10,selected);
+    $("dayTitle").textContent = dt.toLocaleDateString("en-US",{weekday:"long", month:"long", day:"numeric"});
+    var evs = events[selected] || [];
+    $("dayEvents").innerHTML = evs.length ? evs.map(function(e){ return '<li>'+leafSvg(e.kind)+'<span>'+(e.kind==="move"?"<b>Suggested:</b> ":"")+esc(e.label)+'</span></li>'; }).join("") : "";
+    if(!evs.length) $("dayEvents").innerHTML = '<li style="color:var(--ink-3)">Nothing scheduled. A good day to protect.</li>';
+    $("dayNote").value = state.notes[selected] || "";
+    $("daySaved").textContent = "";
+  }
+  $("days").addEventListener("click", function(e){
+    var b = e.target.closest(".day:not(.blank)"); if(!b) return;
+    selected = +b.dataset.d; renderDays(); renderDay();
+  });
+  function onNote(){
+    var v = $("dayNote").value;
+    var had = !!state.notes[selected];
+    if(v.trim()) state.notes[selected] = v; else delete state.notes[selected];
+    save(); $("daySaved").textContent = "Saved";
+    if(had !== !!state.notes[selected]) renderDays();
+  }
+  $("dayNote").addEventListener("input", onNote);
+  attachMic($("dayNote"), onNote);
+  renderDays(); renderDay();
+
+  // ---------- checklists ----------
+  function allItems(list){ return list.items.map(function(t,i){ return {id:list.id+"-"+i, text:t}; }).concat((state.custom[list.id]||[]).map(function(c){ return {id:c.id, text:c.text, custom:true}; })); }
+  function renderLists(){
+    $("lists").innerHTML = KIT.checklists.map(function(l){
+      var items = allItems(l), done = items.filter(function(i){ return state.checks[i.id]; }).length;
+      return '<article class="list" data-list="'+l.id+'"><h3>'+esc(l.title)+'</h3><p class="when">'+esc(l.when)+'</p>'+
+        '<div class="bar"><i style="width:'+(items.length? done/items.length*100 : 0)+'%"></i></div><div class="count">'+done+' of '+items.length+' done</div>'+
+        items.map(function(i){ return '<label class="item"><input type="checkbox" data-id="'+i.id+'"'+(state.checks[i.id]?" checked":"")+'><span>'+esc(i.text)+'</span>'+(i.custom?'<button class="del" data-del="'+i.id+'" aria-label="Remove this step">×</button>':'')+'</label>'; }).join("")+
+        '<form class="add" data-add="'+l.id+'"><input placeholder="Add your own step" aria-label="Add your own step to '+esc(l.title)+'"><button class="btn" type="submit">Add</button></form></article>';
+    }).join("");
+    updateProgress();
+  }
+  function updateProgress(){
+    var total=0, done=0;
+    KIT.checklists.forEach(function(l){ allItems(l).forEach(function(i){ total++; if(state.checks[i.id]) done++; }); });
+    $("progText").textContent = done + " of " + total + " steps done";
+    $("ringFg").setAttribute("stroke-dashoffset", 169.6 * (1 - (total? done/total : 0)));
+  }
+  $("lists").addEventListener("change", function(e){
+    if(e.target.type!=="checkbox") return;
+    var id=e.target.dataset.id; if(e.target.checked) state.checks[id]=true; else delete state.checks[id];
+    save();
+    var card = e.target.closest(".list"), l = KIT.checklists.filter(function(x){return x.id===card.dataset.list;})[0];
+    var items = allItems(l), done = items.filter(function(i){return state.checks[i.id];}).length;
+    card.querySelector(".bar i").style.width = (done/items.length*100)+"%";
+    card.querySelector(".count").textContent = done+" of "+items.length+" done";
+    updateProgress();
+    if(done===items.length) toast(l.title + ": all done");
+  });
+  $("lists").addEventListener("click", function(e){
+    var d = e.target.closest("[data-del]"); if(!d) return;
+    e.preventDefault();
+    var id = d.dataset.del;
+    Object.keys(state.custom).forEach(function(k){ state.custom[k] = state.custom[k].filter(function(c){ return c.id!==id; }); });
+    delete state.checks[id]; save(); renderLists();
+  });
+  $("lists").addEventListener("submit", function(e){
+    e.preventDefault();
+    var f=e.target, inp=f.querySelector("input"), v=inp.value.trim(); if(!v) return;
+    var lid=f.dataset.add; (state.custom[lid]=state.custom[lid]||[]).push({id:lid+"-c"+Date.now(), text:v});
+    save(); renderLists();
+    var again = document.querySelector('[data-add="'+lid+'"] input'); if(again) again.focus();
+  });
+  renderLists();
+
+  // ---------- templates ----------
+  var curTpl = KIT.templates[0].id;
+  function fill(s){
+    var m = state.me;
+    return s.replace(/\{\{name\}\}/g, m.name || "[Your name]")
+            .replace(/\{\{school\}\}/g, m.school || "[School]")
+            .replace(/\{\{extra\}\}/g, m.extra || "[" + KIT.extraLabel + "]");
+  }
+  function markup(text){ return esc(text).replace(/\[([^\]\n]+)\]/g, "<mark>[$1]</mark>"); }
+  function tplById(id){ return KIT.templates.filter(function(t){return t.id===id;})[0]; }
+  function renderTplList(){
+    $("tplList").innerHTML = KIT.templates.map(function(t){
+      return '<button class="tpl-pick" data-t="'+t.id+'" aria-pressed="'+(t.id===curTpl)+'"><strong>'+esc(t.title)+'</strong><small>'+esc(t.audience)+(state.tpl[t.id]?", edited":"")+'</small></button>';
+    }).join("");
+  }
+  function renderTemplate(force){
+    var t = tplById(curTpl), saved = state.tpl[curTpl];
+    if(saved && !force){ if(document.activeElement!==$("tplBody")) $("tplBody").innerHTML = markup(saved.body); $("tplSubject").value = saved.subject; }
+    else { $("tplBody").innerHTML = markup(fill(t.body)); $("tplSubject").value = fill(t.subject); }
+    updateMail();
+  }
+  function bodyText(){ return $("tplBody").innerText.replace(/\n{3,}/g,"\n\n").trim(); }
+  function updateMail(){ $("tplMail").href = "mailto:?subject=" + encodeURIComponent($("tplSubject").value) + "&body=" + encodeURIComponent(bodyText()); }
+  function storeTpl(){
+    var wasNew = !state.tpl[curTpl];
+    state.tpl[curTpl] = {subject:$("tplSubject").value, body:bodyText()}; save(); updateMail();
+    if(wasNew) renderTplList();
+  }
+  $("tplList").addEventListener("click", function(e){
+    var b=e.target.closest(".tpl-pick"); if(!b) return;
+    curTpl=b.dataset.t; renderTplList(); renderTemplate(false);
+  });
+  $("tplBody").addEventListener("input", storeTpl);
+  $("tplBody").addEventListener("paste", function(e){ e.preventDefault(); var t=(e.clipboardData||window.clipboardData).getData("text/plain"); document.execCommand("insertText", false, t); });
+  $("tplSubject").addEventListener("input", storeTpl);
+  $("tplReset").addEventListener("click", function(){ delete state.tpl[curTpl]; save(); renderTplList(); renderTemplate(true); toast("Template reset"); });
+  $("tplCopy").addEventListener("click", function(){
+    var text = "Subject: " + $("tplSubject").value + "\n\n" + bodyText();
+    function fallback(){ var ta=document.createElement("textarea"); ta.value=text; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy"); toast("Copied");}catch(e){toast("Select the text and copy it manually");} ta.remove(); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(function(){ toast("Copied"); }, fallback); } else fallback();
+  });
+  renderTplList(); renderTemplate(false);
+
+  // ---------- reflections ----------
+  $("journal").innerHTML = KIT.reflections.map(function(r){
+    return '<article class="prompt"><h3>'+esc(r.prompt)+'</h3><p>'+esc(r.nudge)+'</p><div class="voicebox"><textarea data-r="'+r.id+'" aria-label="'+esc(r.prompt)+'" placeholder="Start anywhere">'+esc(state.refl[r.id]||"")+'</textarea></div></article>';
+  }).join("");
+  Array.prototype.forEach.call(document.querySelectorAll("#journal textarea"), function(ta){
+    var on = function(){ if(ta.value.trim()) state.refl[ta.dataset.r]=ta.value; else delete state.refl[ta.dataset.r]; save(); };
+    ta.addEventListener("input", on); attachMic(ta, on);
+  });
+  $("dlBtn").addEventListener("click", function(){
+    var out = KIT.kitName + " | " + KIT.edition + " | November 2026\n\nREFLECTIONS\n\n";
+    KIT.reflections.forEach(function(r){ out += r.prompt + "\n" + (state.refl[r.id] || "(not answered yet)") + "\n\n"; });
+    var days = Object.keys(state.notes).map(Number).sort(function(a,b){return a-b;});
+    if(days.length){ out += "DAY NOTES\n\n"; days.forEach(function(d){ out += "November " + d + "\n" + state.notes[d] + "\n\n"; }); }
+    try {
+      var a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([out],{type:"text/plain"}));
+      a.download="november-2026-reflections.txt"; document.body.appendChild(a); a.click(); a.remove();
+      toast("Reflections downloaded");
+    } catch(e){ toast("Download isn't available here"); }
+  });
+
+  // ---------- weeks ----------
+  var todayISO = now.toISOString().slice(0,10), nowIdx = -1;
+  KIT.weeks.forEach(function(w,i){ if(todayISO>=w.start && todayISO<=w.end) nowIdx=i; });
+  $("weeks").innerHTML = KIT.weeks.map(function(w,i){
+    return '<article class="week'+(i===nowIdx?" now":"")+'">'+(i===nowIdx?'<span class="nowtag">This week</span>':'')+'<span class="range">'+esc(w.range)+'</span><h3>'+esc(w.title)+'</h3><p>'+esc(w.tip)+'</p><div class="win"><b>Quick win</b>'+esc(w.win)+'</div></article>';
+  }).join("");
+  var tipIdx = now.getDate() % KIT.quickTips.length;
+  function showTip(){ $("quickTip").textContent = KIT.quickTips[tipIdx]; }
+  $("tipNext").addEventListener("click", function(){ tipIdx=(tipIdx+1)%KIT.quickTips.length; showTip(); });
+  showTip();
+
+  // ---------- tabs ----------
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+  function selectTab(tab, focus){
+    tabs.forEach(function(t){ var on=t===tab; t.setAttribute("aria-selected", on); t.tabIndex = on?0:-1; $(t.getAttribute("aria-controls")).hidden = !on; });
+    if(focus) tab.focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener("click", function(){ selectTab(t); });
+    t.addEventListener("keydown", function(e){
+      if(e.key==="ArrowRight"){ selectTab(tabs[(i+1)%tabs.length], true); e.preventDefault(); }
+      if(e.key==="ArrowLeft"){ selectTab(tabs[(i-1+tabs.length)%tabs.length], true); e.preventDefault(); }
+    });
+  });
+  selectTab(tabs[0]);
+  $("printBtn").addEventListener("click", function(){ window.print(); });
+})();
+</script>
+</body>
+</html>
