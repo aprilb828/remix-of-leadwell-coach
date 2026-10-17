@@ -88,8 +88,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Companion Ed-Coach Edition" },
       { name: "twitter:description", content: "A calm, voice-first productivity app for K–12 instructional coaches. No student data required." },
-      { property: "og:image", content: "https://coach.app.companioneducation.com/assets/og-image.jpg" },
-      { name: "twitter:image", content: "https://coach.app.companioneducation.com/assets/og-image.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
     ],
     links: [
       {
