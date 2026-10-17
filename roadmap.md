@@ -1,3 +1,3 @@
-- [ ] Add plan-aware activation and Premium Kits without changing device limits.
-- [ ] Install the supplied kit and social preview; update page social tags.
-- [ ] Check all support links and verify the requested flows.
+- [x] Add plan-aware activation and Premium Kits without changing device limits.
+- [x] Install the supplied kit and social preview; update page social tags.
+- [x] Check all support links and verify the requested flows with simulated activation responses; live Netlify service validation requires its deployment.
