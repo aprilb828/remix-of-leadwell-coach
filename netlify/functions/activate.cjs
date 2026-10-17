@@ -46,7 +46,7 @@ exports.handler = async (event) => {
 
     if (existingError) throw existingError;
     if (existing) {
-      return json(200, { success: true, message: "This device is already activated.", code: normalized, maxActivations });
+      return json(200, { success: true, message: "This device is already activated.", code: normalized, maxActivations, plan: accessCode.plan ?? null });
     }
 
     const { count, error: countError } = await supabase
@@ -76,6 +76,7 @@ exports.handler = async (event) => {
       success: true,
       message: "This device is activated.",
       code: normalized,
+      plan: accessCode.plan ?? null,
       maxActivations,
       activations: (count || 0) + 1,
     });

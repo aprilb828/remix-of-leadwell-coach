@@ -16,6 +16,9 @@ import { ExportData } from "@/components/ExportData";
 import { TourDialog, useTour } from "@/components/TourDialog";
 import { SiteFooter } from "@/components/SiteFooter";
 import appleLogo from "@/assets/companion-apple.png";
+import { PremiumKits } from "@/premium/PremiumKits";
+import { useActivation } from "@/premium/ActivationContext";
+import { isPremiumPlan } from "@/premium/plan";
 
 
 
@@ -28,6 +31,14 @@ export const Route = createFileRoute("/")({
         content:
           "Calm, clear, voice-first daily companion for instructional coaches. Coach with clarity. Support teachers. Protect your well-being.",
       },
+      { property: "og:title", content: "Companion Ed-Coach Edition" },
+      { property: "og:description", content: "A calm, voice-first productivity app for K–12 instructional coaches. No student data required." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: "https://coach.app.companioneducation.com/social-preview.png" },
+      { name: "twitter:image", content: "https://coach.app.companioneducation.com/social-preview.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
     ],
   }),
   component: Index,
@@ -43,9 +54,11 @@ const TABS = [
   { value: "communication", label: "📣 Communication" },
   { value: "weekly", label: "📅 Weekly Reset" },
   { value: "history", label: "🗂️ History" },
+  { value: "premium", label: "Premium Kits" },
 ];
 
 function Index() {
+  const { plan } = useActivation();
   const tour = useTour();
   const [activeTab, setActiveTab] = useState("dashboard");
 
@@ -76,6 +89,7 @@ function Index() {
               <h1 className="text-lg font-semibold leading-tight sm:text-xl">
                 Companion Education-Coach Edition™
               </h1>
+              {isPremiumPlan(plan) && <span className="mt-1 inline-block rounded-md bg-primary-foreground/10 px-2 py-0.5 text-xs font-medium">Premium</span>}
               <p className="text-xs opacity-80 sm:text-sm">
                 The Companion Ed Framework™ · Coach with clarity. Support teachers. Protect your well-being.
               </p>
@@ -137,6 +151,7 @@ function Index() {
             <TabsContent value="communication"><Communication /></TabsContent>
             <TabsContent value="weekly"><WeeklyReset /></TabsContent>
             <TabsContent value="history"><History /></TabsContent>
+            <TabsContent value="premium"><PremiumKits /></TabsContent>
           </div>
         </Tabs>
 

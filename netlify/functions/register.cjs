@@ -39,6 +39,7 @@ exports.handler = async (event) => {
     return json(200, {
       activated: true,
       code: match.code,
+      plan: match.plan ?? null,
       maxActivations: Number(match.max_activations) > 0 ? Number(match.max_activations) : 3,
     });
   } catch (error) {
