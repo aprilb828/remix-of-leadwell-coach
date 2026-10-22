@@ -21,7 +21,9 @@ function renderInline(text: string): ReactNode[] {
 
 type ParaLine = { text: string; br: boolean };
 type Block =
-  | { type: "h1" | "h2" | "h3"; text: string }
+  | { type: "h1"; text: string }
+  | { type: "h2"; text: string }
+  | { type: "h3"; text: string }
   | { type: "ul"; items: string[] }
   | { type: "p"; lines: ParaLine[] };
 
