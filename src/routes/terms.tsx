@@ -1,10 +1,9 @@
-import type { ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import appleLogo from "@/assets/companion-apple.png";
 import { SiteFooter } from "@/components/SiteFooter";
-import termsMd from "./-terms-content.md?raw";
+import { LegalDoc } from "@/components/LegalDoc";
 
 export const Route = createFileRoute("/terms")({
   head: () => ({
@@ -35,43 +34,6 @@ export const Route = createFileRoute("/terms")({
   component: TermsPage,
 });
 
-function inline(text: string): ReactNode[] {
-  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
-    part.startsWith("**") && part.endsWith("**") ? (
-      <strong key={i} className="font-semibold text-foreground">{part.slice(2, -2)}</strong>
-    ) : (
-      part
-    ),
-  );
-}
-
-function renderTerms(md: string): ReactNode[] {
-  const out: ReactNode[] = [];
-  let list: string[] = [];
-  const flush = () => {
-    if (list.length) {
-      const items = list;
-      out.push(
-        <ul key={`ul-${out.length}`} className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
-          {items.map((li, i) => <li key={i}>{inline(li)}</li>)}
-        </ul>,
-      );
-      list = [];
-    }
-  };
-  for (const raw of md.split("\n")) {
-    const line = raw.trim();
-    if (line.startsWith("- ")) { list.push(line.slice(2)); continue; }
-    flush();
-    if (!line || line === "---") continue;
-    if (line.startsWith("## ")) out.push(<h2 key={out.length} className="pt-3 text-base font-semibold">{inline(line.slice(3))}</h2>);
-    else if (line.startsWith("# ")) out.push(<h2 key={out.length} className="text-2xl font-semibold">{inline(line.slice(2))}</h2>);
-    else out.push(<p key={out.length} className="text-sm leading-relaxed text-muted-foreground">{inline(line)}</p>);
-  }
-  flush();
-  return out;
-}
-
 function TermsPage() {
   return (
     <div className="min-h-screen bg-background">
@@ -97,7 +59,7 @@ function TermsPage() {
       </header>
 
       <main className="mx-auto max-w-3xl space-y-3 px-4 py-8">
-        {renderTerms(termsMd)}
+        <LegalDoc slug="terms" />
       </main>
 
       <div className="mx-auto max-w-3xl px-4 pb-8">
