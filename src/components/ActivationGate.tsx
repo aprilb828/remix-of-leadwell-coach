@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { getDeviceId } from "@/lib/device-id";
 import appleLogo from "@/assets/companion-apple.png";
 import { ActivationContext } from "@/premium/ActivationContext";
-import { normalizePlan, PLAN_STORAGE_KEY } from "@/premium/plan";
+import { normalizePlan, PLAN_STORAGE_KEY, isInactivePlan, INACTIVE_ACCESS_MESSAGE } from "@/premium/plan";
 
 const STORAGE_KEY = "companion-coach-access-code";
 const FN = "/.netlify/functions";
@@ -47,7 +47,8 @@ export function ActivationGate({ children }: { children: ReactNode }) {
     (async () => {
       const deviceId = getDeviceId();
       const saved = window.localStorage.getItem(STORAGE_KEY) ?? undefined;
-      setPlan(normalizePlan(window.localStorage.getItem(PLAN_STORAGE_KEY)));
+      const cachedPlan = normalizePlan(window.localStorage.getItem(PLAN_STORAGE_KEY));
+      setPlan(cachedPlan);
       const { ok, data } = navigator.onLine
         ? await callFn("register", { deviceId, code: saved })
         : { ok: false, data: null };
@@ -55,7 +56,17 @@ export function ActivationGate({ children }: { children: ReactNode }) {
       if (!ok || !data) {
         // No activation service reachable — do not lock the app out.
         setActiveCode(saved ?? null);
-        setStatus("unlocked");
+        setMessage(isInactivePlan(cachedPlan) ? INACTIVE_ACCESS_MESSAGE : null);
+        setStatus(isInactivePlan(cachedPlan) ? "locked" : "unlocked");
+        return;
+      }
+      if (isInactivePlan(data["plan"])) {
+        const c = String(data["code"] ?? saved ?? "");
+        if (c) window.localStorage.setItem(STORAGE_KEY, c);
+        setActiveCode(c || null);
+        savePlan("inactive");
+        setMessage(INACTIVE_ACCESS_MESSAGE);
+        setStatus("locked");
         return;
       }
       if (data["activated"]) {
@@ -85,7 +96,13 @@ export function ActivationGate({ children }: { children: ReactNode }) {
       setMessage("The activation service isn't reachable from here. Please try again shortly.");
       return;
     }
-    if (data["success"]) {
+    if (isInactivePlan(data["plan"])) {
+      window.localStorage.setItem(STORAGE_KEY, entered);
+      setActiveCode(entered);
+      savePlan("inactive");
+      setMessage(INACTIVE_ACCESS_MESSAGE);
+      setStatus("locked");
+    } else if (data["success"]) {
       window.localStorage.setItem(STORAGE_KEY, entered);
       setActiveCode(entered);
       savePlan(data["plan"]);

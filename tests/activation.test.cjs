@@ -70,3 +70,42 @@ test("service failure is an error response rather than a verified revocation", a
   reset("premium-monthly"); failed = true;
   assert.equal((await register(event)).statusCode, 500);
 });
+test("premium activates the app and returns premium content eligibility", async () => {
+  reset("premium");
+  const body = JSON.parse((await activate(event)).body);
+  assert.equal(body.success, true);
+  assert.equal(body.plan, "premium");
+});
+test("one-time activates the basic app", async () => {
+  reset("one-time");
+  const body = JSON.parse((await activate(event)).body);
+  assert.equal(body.success, true);
+  assert.equal(body.plan, "one-time");
+});
+test("inactive rejects activation without consuming a device slot", async () => {
+  reset("inactive");
+  const result = await activate(event);
+  assert.equal(result.statusCode, 403);
+  assert.equal(JSON.parse(result.body).success, false);
+  assert.equal(JSON.parse(result.body).plan, "inactive");
+  assert.equal(insertion, null);
+});
+test("inactive rejects an already activated device", async () => {
+  reset("inactive"); existing = { code: accessCode.code };
+  assert.equal((await activate(event)).statusCode, 403);
+  assert.equal(insertion, null);
+});
+test("register blocks the next visit after premium becomes inactive", async () => {
+  reset("premium"); existing = { code: accessCode.code };
+  assert.equal(JSON.parse((await register(event)).body).activated, true);
+  accessCode.plan = "inactive";
+  const body = JSON.parse((await register(event)).body);
+  assert.equal(body.activated, false);
+  assert.equal(body.plan, "inactive");
+});
+test("register restores access after inactive changes back to premium", async () => {
+  reset("inactive"); existing = { code: accessCode.code };
+  assert.equal(JSON.parse((await register(event)).body).activated, false);
+  accessCode.plan = "premium";
+  assert.equal(JSON.parse((await register(event)).body).activated, true);
+});

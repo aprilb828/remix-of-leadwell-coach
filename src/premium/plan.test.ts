@@ -1,9 +1,15 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
-import { isPremiumPlan, normalizePlan } from "./plan";
+import { isPremiumPlan, isInactivePlan, normalizePlan } from "./plan";
 import { kits, newestKitsFirst } from "./kits";
 
 describe("Premium eligibility", () => {
+  test("premium includes kits", () => assert.equal(isPremiumPlan("premium"), true));
+  test("inactive excludes kits", () => assert.equal(isPremiumPlan("inactive"), false));
+  test("inactive blocks app access", () => assert.equal(isInactivePlan("inactive"), true));
+  test("premium allows app access", () => assert.equal(isInactivePlan("premium"), false));
+  test("one-time allows basic app access", () => assert.equal(isInactivePlan("one-time"), false));
+  test("inactive remains cached as inactive", () => assert.equal(normalizePlan("inactive"), "inactive"));
   test("premium-monthly includes kits", () => assert.equal(isPremiumPlan("premium-monthly"), true));
   test("premium-yearly includes kits", () => assert.equal(isPremiumPlan("premium-yearly"), true));
   test("premium-comp includes kits", () => assert.equal(isPremiumPlan("premium-comp"), true));
