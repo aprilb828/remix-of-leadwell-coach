@@ -30,6 +30,13 @@ exports.handler = async (event) => {
     if ("edition" in accessCode && accessCode.edition && String(accessCode.edition).toLowerCase() !== EDITION) {
       return json(404, { success: false, message: "That access code was not found for the Coach Edition." });
     }
+    if (accessCode.plan === "inactive") {
+      return json(403, {
+        success: false,
+        plan: "inactive",
+        message: "Your access has ended. If you think this is a mistake, please contact support@companioneducation.com.",
+      });
+    }
     if ("active" in accessCode && accessCode.active === false) {
       return json(403, { success: false, message: "That access code is no longer active." });
     }

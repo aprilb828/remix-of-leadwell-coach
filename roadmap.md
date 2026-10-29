@@ -1,3 +1,6 @@
 - [x] Add plan-aware activation and Premium Kits without changing device limits.
 - [x] Install the supplied kit and social preview; update page social tags.
 - [x] Check all support links and verify the requested flows with simulated activation responses; live Netlify service validation requires its deployment.
+- [x] Block inactive plans on activation and launch; allow premium kits for premium and keep one-time basic-only.
+- [ ] Update existing membership codes without repeat emails; verify shared plan constraints (requires access to shared webhook and database).
+- [x] Test membership plan behavior with 25 passing tests and browser checks using simulated service responses; provide changed files and test steps.

@@ -31,10 +31,19 @@ exports.handler = async (event) => {
 
     const match = (valid || []).find(
       (c) =>
-        c.active !== false &&
+        (c.active !== false || c.plan === "inactive") &&
         (!("edition" in c) || !c.edition || String(c.edition).toLowerCase() === EDITION),
     );
     if (!match) return json(200, { activated: false });
+
+    if (match.plan === "inactive") {
+      return json(200, {
+        activated: false,
+        code: match.code,
+        plan: "inactive",
+        message: "Your access has ended. If you think this is a mistake, please contact support@companioneducation.com.",
+      });
+    }
 
     return json(200, {
       activated: true,
